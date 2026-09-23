@@ -168,6 +168,9 @@ export const products: Product[] = [
         src: "/images/urunler/kirmizi-sirk-salopet.webp",
         alt: "Kırmızı sirk çadırı nakışlı, yıldız işlemeli kısa salopet takım ve isim nakışlı beyaz gömlek",
       },
+      { src: "/images/urunler/sirk-cadir-detay.webp", alt: "Salopet ön panosundaki sirk çadırı nakışı yakın çekim" },
+      { src: "/images/urunler/sirk-isim-detay.webp", alt: "Gömlek koluna işlenmiş Yağız Ali isim nakışı" },
+      { src: "/images/urunler/sirk-yildiz-detay.webp", alt: "Kırmızı salopet üzerindeki altın yıldız işlemeleri ve saten biye" },
     ],
     color: "Kırmızı / Beyaz",
     shortDescription:
@@ -200,6 +203,9 @@ export const products: Product[] = [
         src: "/images/urunler/bej-aslan-salopet.webp",
         alt: "Aslan ve 1 yaş nakışlı gömlek, askısında isim, belinde doğum tarihi işlenmiş bej kısa salopet takım",
       },
+      { src: "/images/urunler/aslan-nakis-detay.webp", alt: "Gömlekteki taçlı aslan ve 1 yaş nakışı yakın çekim" },
+      { src: "/images/urunler/aslan-isim-detay.webp", alt: "Salopet askısına işlenmiş Muhammed isim nakışı" },
+      { src: "/images/urunler/aslan-tarih-detay.webp", alt: "Salopet beline işlenmiş 28.08.2025 doğum tarihi nakışı" },
     ],
     color: "Bej / Beyaz",
     shortDescription:
@@ -233,6 +239,8 @@ export const products: Product[] = [
     price: 1590,
     images: [
       { src: u("photo-1765980641678-f28f49092350"), alt: "Pudra pembe kısa salopet giyen çocuk" },
+      { src: u("photo-1615175254861-f9f581d95996"), alt: "Pembe tonlarda kıyafetli kız çocuk" },
+      { src: u("photo-1622290291720-ac961c43ee30"), alt: "Pembe ayıcık desenli bebek kıyafeti detayı" },
     ],
     color: "Pudra Pembe",
     shortDescription: "Yumuşak pudra tonunda, fırfır askılı kısa salopet ve beyaz body.",
@@ -261,6 +269,8 @@ export const products: Product[] = [
     price: 1590,
     images: [
       { src: u("photo-1774641374314-6aaaf7d45d90"), alt: "Salopet takım giyen iki küçük çocuk" },
+      { src: u("photo-1774641374251-d2d965dbf542"), alt: "Salopet giyen çocuklar parkta" },
+      { src: u("photo-1490481651871-ab68de25d43d"), alt: "Askıda çocuk kıyafetleri" },
     ],
     color: "Mint Yeşili",
     shortDescription: "Ferah mint tonunda kısa salopet, beyaz gömlek ve papyon.",
@@ -286,6 +296,8 @@ export const products: Product[] = [
     price: 1950,
     images: [
       { src: u("photo-1698939096910-5b9a8fec3425"), alt: "Krem uzun salopet giyen çocuk" },
+      { src: u("photo-1632337948784-35863f872dc8"), alt: "Atölyede askı ve makas, dikim hazırlığı" },
+      { src: u("photo-1490481651871-ab68de25d43d"), alt: "Ahşap askılarda çocuk kıyafetleri" },
     ],
     color: "Krem",
     shortDescription: "Doğal keten dokulu krem uzun salopet, uzun kollu gömlek ve kahve papyon.",
@@ -315,6 +327,8 @@ export const products: Product[] = [
     oldPrice: 2390,
     images: [
       { src: u("photo-1541015492536-31d513c59861"), alt: "Uzun salopet giyen gülümseyen erkek çocuk" },
+      { src: u("photo-1698939096910-5b9a8fec3425"), alt: "Uzun salopet giyen çocuk bahçede" },
+      { src: u("photo-1632337948784-35863f872dc8"), alt: "Atölyede dikim hazırlığı" },
     ],
     color: "Kahverengi",
     shortDescription: "Sonbahar ve kış için yumuşak kadife uzun salopet, gömlek ve papyon.",
@@ -343,6 +357,8 @@ export const products: Product[] = [
     price: 1890,
     images: [
       { src: u("photo-1774641374251-d2d965dbf542"), alt: "Uzun salopet giyen küçük çocuklar parkta" },
+      { src: u("photo-1774641374314-6aaaf7d45d90"), alt: "Salopet giyen iki çocuk" },
+      { src: u("photo-1622290319146-7b63df48a635"), alt: "Beyaz ve mavi bebek kıyafeti" },
     ],
     color: "Bebe Mavisi",
     shortDescription: "Açık mavi uzun salopet, beyaz gömlek ve lacivert papyon.",
@@ -369,6 +385,7 @@ export const products: Product[] = [
     images: [
       { src: u("photo-1578897367107-2828e351c8a8"), alt: "Elbisesinin eteğini tutan gülümseyen kız çocuk" },
       { src: u("photo-1615175254861-f9f581d95996"), alt: "Pembe beyaz elbiseli kız çocuk sandalyede oturuyor" },
+      { src: u("photo-1620774760711-caa4c94d683a"), alt: "Beyaz elbiseli kız çocuk" },
     ],
     color: "Pudra",
     shortDescription: "Kat kat tül etekli, saten kuşaklı pudra renkli özel gün elbisesi.",
@@ -401,6 +418,8 @@ export const products: Product[] = [
     price: 1490,
     images: [
       { src: u("photo-1620774760711-caa4c94d683a"), alt: "Beyaz elbise ve çiçekli saç bandı takan kız çocuk" },
+      { src: u("photo-1684244160171-97f5dac39204"), alt: "Askıda asılı beyaz kız elbisesi" },
+      { src: u("photo-1562438995-20c8bc11d4a9"), alt: "Elbiseli kız çocuk çimenlikte" },
     ],
     color: "Krem",
     shortDescription: "Dantel yakalı, büzgülü krem elbise ve çiçekli saç bandı.",
@@ -428,6 +447,8 @@ export const products: Product[] = [
     price: 1550,
     images: [
       { src: u("photo-1599624427857-461fd60c23e5"), alt: "Çimenlikte duran açık renk elbiseli kız çocuk" },
+      { src: u("photo-1562438995-20c8bc11d4a9"), alt: "Elbiseli kız çocuk bahçede" },
+      { src: u("photo-1560506840-ec148e82a604"), alt: "Askıda renkli elbiseler" },
     ],
     color: "Lila",
     shortDescription: "Göğsü küçük çiçek nakışlı, kolsuz lila yazlık elbise.",
@@ -453,6 +474,8 @@ export const products: Product[] = [
     price: 1790,
     images: [
       { src: u("photo-1578897366846-358bb1c2412a"), alt: "Kırmızı uzun kollu elbise giyen kız çocuk" },
+      { src: u("photo-1560506840-ec148e82a604"), alt: "Askıda uzun kollu elbiseler" },
+      { src: u("photo-1578897367107-2828e351c8a8"), alt: "Elbisesinin eteğini tutan kız çocuk" },
     ],
     color: "Kırmızı",
     shortDescription: "Yılbaşı ve kış davetleri için uzun kollu kırmızı kadife elbise.",
@@ -479,6 +502,7 @@ export const products: Product[] = [
     images: [
       { src: u("photo-1522771930-78848d9293e8"), alt: "Beyaz örtü üzerinde oturan bebek" },
       { src: u("photo-1622290291720-ac961c43ee30"), alt: "Beyaz ve pembe ayıcık desenli bebek zıbınları" },
+      { src: u("photo-1546015720-b8b30df5aa27"), alt: "Örgü şapkalı bebek ve peluş ayı" },
     ],
     color: "Krem / Beyaz",
     shortDescription: "Tulum, şapka, eldiven ve isim nakışlı battaniyeden oluşan 4 parça set.",
@@ -508,6 +532,7 @@ export const products: Product[] = [
     images: [
       { src: u("photo-1569974641446-22542de88536"), alt: "Üç farklı renkte bebek zıbını" },
       { src: u("photo-1622290319146-7b63df48a635"), alt: "Beyaz ve mavi bebek tulumu" },
+      { src: u("photo-1622290291720-ac961c43ee30"), alt: "Ayıcık desenli bebek zıbını" },
     ],
     color: "Karışık Pastel",
     shortDescription: "Pastel tonlarda 3 parça pamuklu zıbın ve body seti.",

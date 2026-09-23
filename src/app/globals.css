@@ -1187,27 +1187,111 @@ p {
   }
 }
 
+.gallery-stage {
+  position: relative;
+}
+
 .gallery-main {
   position: relative;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--linen);
+  cursor: zoom-in;
+  touch-action: pan-y;
 }
 
-.gallery-main img {
+.gallery-zoom {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.gallery-zoom img {
   object-fit: cover;
+}
+
+.gallery-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.9);
+  color: var(--brown);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.gallery-main.is-zooming .gallery-hint {
+  opacity: 0;
+}
+
+@media (hover: none) {
+  .gallery-hint {
+    display: none;
+  }
+}
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 253, 249, 0.92);
+  color: var(--brown);
+  box-shadow: 0 6px 16px -8px rgba(61, 42, 31, 0.6);
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s;
+}
+
+.gallery-arrow:hover {
+  background: var(--white);
+}
+
+.gallery-prev {
+  left: 12px;
+}
+
+.gallery-next {
+  right: 12px;
+}
+
+.gallery-counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(61, 42, 31, 0.7);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 800;
+  pointer-events: none;
 }
 
 .gallery-thumbs {
   display: flex;
   gap: 10px;
   margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 4px;
 }
 
 .gallery-thumbs button {
   position: relative;
-  width: 76px;
+  flex: 0 0 76px;
   aspect-ratio: 3 / 4;
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -1215,6 +1299,15 @@ p {
   padding: 0;
   cursor: pointer;
   background: var(--linen);
+  opacity: 0.75;
+  transition:
+    opacity 0.2s,
+    border-color 0.2s;
+}
+
+.gallery-thumbs button.is-active,
+.gallery-thumbs button:hover {
+  opacity: 1;
 }
 
 .gallery-thumbs button.is-active {
@@ -1223,6 +1316,95 @@ p {
 
 .gallery-thumbs img {
   object-fit: cover;
+}
+
+.lightbox {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(30, 20, 14, 0.94);
+}
+
+.lightbox::backdrop {
+  background: rgba(30, 20, 14, 0.94);
+}
+
+.lightbox-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.lightbox-image {
+  position: absolute;
+  inset: 56px 64px 64px;
+}
+
+.lightbox-image img {
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 253, 249, 0.14);
+  color: #fff;
+  cursor: pointer;
+}
+
+.lightbox .gallery-arrow {
+  background: rgba(255, 253, 249, 0.16);
+  color: #fff;
+}
+
+.lightbox .gallery-arrow:hover {
+  background: rgba(255, 253, 249, 0.3);
+}
+
+.lightbox-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.lightbox-dots button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+}
+
+.lightbox-dots button[aria-current="true"] {
+  background: #fff;
+}
+
+@media (max-width: 640px) {
+  .lightbox-image {
+    inset: 56px 8px 56px;
+  }
+
+  .gallery-arrow {
+    width: 38px;
+    height: 38px;
+  }
 }
 
 .product-info h1 {
