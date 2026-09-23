@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Orimini
 
-## Getting Started
+Kişiye özel nakışlı bebek ve çocuk kıyafetleri için Next.js (App Router) e-ticaret sitesi. Siparişler şimdilik WhatsApp (0506 273 59 29) üzerinden alınır.
 
-First, run the development server:
+## Geliştirme
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # üretim derlemesi
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Nerede ne var?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Dosya | İçerik |
+| --- | --- |
+| `src/data/site.ts` | Firma adı, telefon, şehir, çalışma saatleri, ücretsiz kargo limiti, Instagram |
+| `src/data/products.ts` | Kategoriler, yaş/beden listesi ve ürünler (fiyat, görsel, açıklama, set içeriği, bedenler) |
+| `src/lib/whatsapp.ts` | WhatsApp sipariş mesajının metni |
+| `src/lib/cart.tsx` | Tarayıcıda tutulan sepet |
+| `public/images/` | Logo ve ürün fotoğrafları |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Yeni ürün eklemek için `products.ts` içindeki `products` listesine bir kayıt ekleyin; sayfa, sitemap ve yapısal veri otomatik oluşur. Kendi fotoğraflarınızı `public/images/urunler/` klasörüne koyup `src: "/images/urunler/dosya.webp"` şeklinde kullanın. Şu anki Unsplash görselleri ve fiyatlar örnektir.
 
-## Learn More
+## Yayına alma
 
-To learn more about Next.js, take a look at the following resources:
+Vercel'e bağlayıp `NEXT_PUBLIC_SITE_URL` ortam değişkenine alan adını (ör. `https://www.orimini.com`) yazın. Canonical adresler, sitemap ve Open Graph etiketleri bu değeri kullanır.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## SEO
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Sayfa bazlı başlık/açıklama, canonical ve Open Graph etiketleri
+- `sitemap.xml`, `robots.txt`, `manifest.webmanifest`
+- JSON-LD: ClothingStore (Adana), Product + Offer, BreadcrumbList, CollectionPage, FAQPage
+- Tüm ürün ve kategori sayfaları statik olarak üretilir
