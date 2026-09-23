@@ -6,6 +6,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { site } from "@/data/site";
 import { CartProvider } from "@/lib/cart";
+import { FavoritesProvider } from "@/lib/favorites";
+import { ConsentBanner } from "@/components/ConsentBanner";
 import "./globals.css";
 
 const serif = Cormorant_Garamond({
@@ -30,7 +32,6 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [...site.keywords],
   applicationName: site.name,
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "tr_TR",
@@ -60,8 +61,8 @@ const organizationLd = {
   slogan: site.slogan,
   description: site.description,
   url: site.url,
-  logo: `${site.url}/images/orimini-rozet.png`,
-  image: `${site.url}/images/orimini-logo.jpg`,
+  logo: `${site.url}/images/orimini-monogram.png`,
+  image: `${site.url}/opengraph-image.jpg`,
   telephone: site.phoneE164,
   priceRange: "₺₺",
   currenciesAccepted: "TRY",
@@ -89,10 +90,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           İçeriğe geç
         </a>
         <CartProvider>
-          <Header />
-          <main id="icerik">{children}</main>
-          <Footer />
-          <WhatsAppFloat />
+          <FavoritesProvider>
+            <Header />
+            <main id="icerik">{children}</main>
+            <Footer />
+            <WhatsAppFloat />
+            <ConsentBanner />
+          </FavoritesProvider>
         </CartProvider>
         <JsonLd data={organizationLd} />
         <JsonLd
@@ -102,6 +106,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             name: site.name,
             url: site.url,
             inLanguage: "tr-TR",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: { "@type": "EntryPoint", urlTemplate: `${site.url}/arama?q={search_term_string}` },
+              "query-input": "required name=search_term_string",
+            },
           }}
         />
       </body>

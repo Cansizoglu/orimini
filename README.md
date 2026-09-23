@@ -25,7 +25,7 @@ Yeni ürün eklemek için `products.ts` içindeki `products` listesine bir kayı
 
 ## Yayına alma
 
-Vercel'e bağlayıp `NEXT_PUBLIC_SITE_URL` ortam değişkenine alan adını (ör. `https://www.orimini.com`) yazın. Canonical adresler, sitemap ve Open Graph etiketleri bu değeri kullanır.
+Demo adresi https://orimini.vercel.app (varsayılan). Alan adı alınınca Vercel'de `NEXT_PUBLIC_SITE_URL` ortam değişkenine yeni adresi (ör. `https://www.orimini.com`) yazın. Canonical adresler, sitemap ve Open Graph etiketleri bu değeri kullanır.
 
 ## SEO
 

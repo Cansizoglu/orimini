@@ -4,7 +4,7 @@ import { site } from "@/data/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const staticPages = ["", "/urunler", "/hakkimizda", "/iletisim", "/beden-rehberi", "/kargo-ve-iade", "/sikca-sorulan-sorular"];
+  const staticPages = ["", "/urunler", "/hakkimizda", "/iletisim", "/beden-rehberi", "/kargo-ve-iade", "/sikca-sorulan-sorular", "/mesafeli-satis-sozlesmesi", "/on-bilgilendirme-formu", "/kvkk-aydinlatma-metni", "/cerez-politikasi"];
   return [
     ...staticPages.map((path) => ({
       url: `${site.url}${path}`,

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductCard } from "@/components/ProductCard";
@@ -7,6 +8,12 @@ import { WhatsAppIcon } from "@/components/icons";
 import { categories, products } from "@/data/products";
 import { site } from "@/data/site";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
+
+export const metadata: Metadata = {
+  title: { absolute: `${site.name} | Kişiye Özel Nakışlı Bebek ve Çocuk Kıyafetleri` },
+  description: site.description,
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   const featured = products.filter((p) => p.featured).slice(0, 8);
@@ -52,9 +59,6 @@ export default function HomePage() {
                 priority
                 sizes="(max-width: 860px) 80vw, 420px"
               />
-            </div>
-            <div className="hero-badge">
-              <Image src="/images/orimini-rozet.png" alt="" fill sizes="180px" />
             </div>
           </div>
         </div>

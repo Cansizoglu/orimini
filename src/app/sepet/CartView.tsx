@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { WhatsAppIcon } from "@/components/icons";
+import { OrderConsent } from "@/components/OrderConsent";
 import { SafeImage } from "@/components/SafeImage";
 import { formatPrice, sizeLabel } from "@/data/products";
 import { site } from "@/data/site";
@@ -14,6 +15,8 @@ export function CartView() {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [note, setNote] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
 
   if (!ready) return <div className="empty" aria-busy="true" />;
 
@@ -97,11 +100,25 @@ export function CartView() {
           <label htmlFor="siparis-notu">Sipariş notu</label>
           <textarea id="siparis-notu" rows={2} value={note} onChange={(e) => setNote(e.target.value)} />
         </div>
+        <OrderConsent
+          checked={consent}
+          error={consentError && !consent}
+          onChange={(v) => {
+            setConsent(v);
+            if (v) setConsentError(false);
+          }}
+        />
         <a
-          href={whatsappUrl(message)}
+          href={consent ? whatsappUrl(message) : "#"}
           className="btn btn-whatsapp btn-block btn-large"
           target="_blank"
           rel="noopener noreferrer"
+          onClick={(e) => {
+            if (!consent) {
+              e.preventDefault();
+              setConsentError(true);
+            }
+          }}
         >
           <WhatsAppIcon size={22} /> WhatsApp ile sipariş ver
         </a>

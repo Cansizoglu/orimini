@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { formatPrice, getCategory, SIZES, type Product } from "@/data/products";
+import { getRatingSummary } from "@/data/reviews";
+import { FavoriteButton } from "./FavoriteButton";
 import { SafeImage } from "./SafeImage";
+import { Stars } from "./Stars";
 
 export function sizeRange(product: Product) {
   const labels = SIZES.filter((s) => product.sizes.includes(s.id)).map((s) => s.label);
@@ -9,6 +12,7 @@ export function sizeRange(product: Product) {
 
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const cover = product.images[0];
+  const rating = getRatingSummary(product.slug);
   return (
     <article className="product-card">
       <Link href={`/urun/${product.slug}`} className="product-card-link">
@@ -29,11 +33,16 @@ export function ProductCard({ product, priority = false }: { product: Product; p
               ))}
             </div>
           )}
+          <FavoriteButton slug={product.slug} name={product.name} />
         </div>
         <div className="product-card-body">
           <p className="product-card-cat">{getCategory(product.category)?.shortName}</p>
           <h3 className="product-card-title">{product.name}</h3>
           <p className="product-card-sizes">{sizeRange(product)}</p>
+          <p className="product-card-rating">
+            <Stars value={rating.average} size={14} />
+            <span>({rating.count})</span>
+          </p>
           <p className="price">
             {product.oldPrice && <del>{formatPrice(product.oldPrice)}</del>}
             <span>{formatPrice(product.price)}</span>
