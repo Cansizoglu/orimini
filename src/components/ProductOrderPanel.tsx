@@ -7,6 +7,7 @@ import { SIZES, type Product } from "@/data/products";
 import { useCart } from "@/lib/cart";
 import { questionMessage, singleOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 import { BagIcon, WhatsAppIcon } from "./icons";
+import { OrderConsent } from "./OrderConsent";
 
 export function ProductOrderPanel({ product }: { product: Product }) {
   const searchParams = useSearchParams();
@@ -19,6 +20,8 @@ export function ProductOrderPanel({ product }: { product: Product }) {
   const [note, setNote] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
   const { add } = useCart();
 
   const selectSize = (id: string) => {
@@ -39,7 +42,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
     return true;
   };
 
-  const orderHref = size
+  const orderHref = size && consent
     ? whatsappUrl(singleOrderMessage({ product, size, quantity, personalization, note }))
     : undefined;
 
@@ -124,6 +127,15 @@ export function ProductOrderPanel({ product }: { product: Product }) {
         </button>
       </div>
 
+      <OrderConsent
+        checked={consent}
+        error={consentError && !consent}
+        onChange={(v) => {
+          setConsent(v);
+          if (v) setConsentError(false);
+        }}
+      />
+
       <a
         className="btn btn-whatsapp btn-block btn-large"
         href={orderHref ?? "#beden-secimi"}
@@ -132,7 +144,8 @@ export function ProductOrderPanel({ product }: { product: Product }) {
         onClick={(e) => {
           if (!orderHref) {
             e.preventDefault();
-            requireSize();
+            if (!requireSize()) return;
+            if (!consent) setConsentError(true);
           }
         }}
       >

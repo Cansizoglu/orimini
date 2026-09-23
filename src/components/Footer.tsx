@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { categories } from "@/data/products";
-import { infoLinks, site } from "@/data/site";
+import { infoLinks, legalLinks, site } from "@/data/site";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
 import { ClockIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "./icons";
 
@@ -10,7 +10,13 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <Image src="/images/orimini-rozet.png" alt={`${site.name} logosu`} width={112} height={112} />
+          <Image
+            src="/images/orimini-logo-yazi.webp"
+            alt={`${site.name} logosu`}
+            width={720}
+            height={221}
+            className="footer-logo"
+          />
           <p>{site.tagline}. Her parça, küçükler için sevgiyle ve özenle hazırlanır.</p>
           <a
             className="btn btn-whatsapp btn-small"
@@ -39,7 +45,7 @@ export function Footer() {
         <div>
           <h2 className="footer-title">Kurumsal</h2>
           <ul className="footer-links">
-            {infoLinks.map((l) => (
+            {[...infoLinks, ...legalLinks].map((l) => (
               <li key={l.href}>
                 <Link href={l.href}>{l.label}</Link>
               </li>

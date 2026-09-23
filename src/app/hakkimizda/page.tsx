@@ -44,7 +44,7 @@ export default function AboutPage() {
           </a>
         </div>
         <div className="split-media">
-          <Image src="/images/orimini-logo.jpg" alt={`${site.name} logosu`} fill sizes="(max-width: 860px) 100vw, 50vw" />
+          <Image src="/images/urunler/bej-aslan-salopet.webp" alt="Orimini atölyesinde hazırlanan isim nakışlı salopet takım" fill sizes="(max-width: 860px) 100vw, 50vw" />
         </div>
       </div>
     </div>

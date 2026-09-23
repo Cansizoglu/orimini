@@ -131,6 +131,8 @@ export type Product = {
   };
   badges?: string[];
   featured?: boolean;
+  // Arama motorları için meta başlık (~60 karakter) ve açıklama (~155 karakter).
+  seo: { title: string; description: string };
 };
 
 const u = (id: string, w = 1200) =>
@@ -152,6 +154,11 @@ const standardCare = [
 export const products: Product[] = [
   {
     slug: "kirmizi-sirk-temali-kisa-salopet-takim",
+    seo: {
+      title: "Kırmızı Sirk Temalı İsim Nakışlı Kısa Salopet Takım",
+      description:
+        "Sirk çadırı nakışlı, yıldız işlemeli kırmızı kısa salopet, isim nakışlı gömlek ve papyon. Doğum günü için 6-9 ay – 4 yaş. WhatsApp ile sipariş.",
+    },
     code: "ORM-1001",
     name: "Kırmızı Sirk Temalı Kısa Salopet Takım",
     category: "kisa-salopet-takim",
@@ -179,6 +186,11 @@ export const products: Product[] = [
   },
   {
     slug: "bej-aslan-nakisli-1-yas-kisa-salopet-takim",
+    seo: {
+      title: "1 Yaş Doğum Günü Kıyafeti - Aslan Nakışlı Salopet Takım",
+      description:
+        "Aslan ve 1 yaş nakışlı gömlek, askısında isim, belinde doğum tarihi işlenen bej salopet takım. İlk yaş günü için kişiye özel, WhatsApp ile sipariş.",
+    },
     code: "ORM-1002",
     name: "Bej Aslan Nakışlı 1 Yaş Kısa Salopet Takım",
     category: "kisa-salopet-takim",
@@ -210,6 +222,11 @@ export const products: Product[] = [
   },
   {
     slug: "pudra-pembe-kisa-salopet-takim",
+    seo: {
+      title: "Pudra Pembe Kız Bebek Kısa Salopet Takım",
+      description:
+        "Fırfır askılı pudra pembe kısa salopet ve pamuklu body. İsim nakışı ücretsiz, 3-6 ay – 3 yaş beden. Orimini'den WhatsApp ile kolay sipariş.",
+    },
     code: "ORM-1003",
     name: "Pudra Pembe Kısa Salopet Takım",
     category: "kisa-salopet-takim",
@@ -229,9 +246,15 @@ export const products: Product[] = [
     sizes: sizesBetween("3-6-ay", "3-yas"),
     personalization: nameEmbroidery,
     badges: ["Kişiye Özel"],
+    featured: true,
   },
   {
     slug: "mint-yesili-kisa-salopet-takim",
+    seo: {
+      title: "Mint Yeşili Kısa Salopet Takım - Gömlek ve Papyonlu",
+      description:
+        "Mint yeşili kısa salopet, beyaz gömlek ve papyon. Bayram ve yaz düğünleri için isim nakışlı, 6-9 ay – 5 yaş beden seçenekleri.",
+    },
     code: "ORM-1004",
     name: "Mint Yeşili Kısa Salopet Takım",
     category: "kisa-salopet-takim",
@@ -252,6 +275,11 @@ export const products: Product[] = [
   },
   {
     slug: "krem-keten-uzun-salopet-takim",
+    seo: {
+      title: "Krem Keten Uzun Salopet Takım - İsim Nakışlı",
+      description:
+        "Keten dokulu krem uzun salopet, uzun kollu gömlek ve kahve papyon. Kişiye özel isim nakışı ile 6-9 ay – 6 yaş. WhatsApp ile sipariş.",
+    },
     code: "ORM-2001",
     name: "Krem Keten Uzun Salopet Takım",
     category: "uzun-salopet-takim",
@@ -275,6 +303,11 @@ export const products: Product[] = [
   },
   {
     slug: "kahve-kadife-uzun-salopet-takim",
+    seo: {
+      title: "Kahve Kadife Uzun Salopet Takım - Kışlık Çocuk Takımı",
+      description:
+        "Yumuşak kadife kahverengi uzun salopet, gömlek ve papyon. Sonbahar-kış davetleri için 9-12 ay – 8 yaş, isim nakışı ücretsiz.",
+    },
     code: "ORM-2002",
     name: "Kahve Kadife Uzun Salopet Takım",
     category: "uzun-salopet-takim",
@@ -299,6 +332,11 @@ export const products: Product[] = [
   },
   {
     slug: "bebe-mavisi-uzun-salopet-takim",
+    seo: {
+      title: "Bebe Mavisi Uzun Salopet Takım - Mevlüt ve Sünnet",
+      description:
+        "Açık mavi uzun salopet, beyaz gömlek ve lacivert papyon. Mevlüt, sünnet ve aile davetleri için 0-3 ay – 4 yaş, baş harf nakışlı.",
+    },
     code: "ORM-2003",
     name: "Bebe Mavisi Uzun Salopet Takım",
     category: "uzun-salopet-takim",
@@ -319,6 +357,11 @@ export const products: Product[] = [
   },
   {
     slug: "pudra-tul-etekli-kiz-elbise",
+    seo: {
+      title: "Pudra Tül Etekli Kız Çocuk Elbise - Doğum Günü",
+      description:
+        "Kat kat tül etekli, saten kuşaklı pudra kız elbise ve saç bandı. Doğum günü ve düğünler için 6-9 ay – 8 yaş. WhatsApp ile sipariş.",
+    },
     code: "ORM-3001",
     name: "Pudra Tül Etekli Kız Elbise",
     category: "kiz-elbise",
@@ -347,6 +390,11 @@ export const products: Product[] = [
   },
   {
     slug: "krem-dantel-yakali-kiz-elbise",
+    seo: {
+      title: "Krem Dantel Yakalı Kız Elbise ve Çiçekli Saç Bandı",
+      description:
+        "Dantel yakalı, büzgülü krem pamuklu kız elbise ve çiçekli saç bandı. 6-9 ay – 10 yaş beden, isim nakışı seçeneğiyle.",
+    },
     code: "ORM-3002",
     name: "Krem Dantel Yakalı Kız Elbise",
     category: "kiz-elbise",
@@ -369,6 +417,11 @@ export const products: Product[] = [
   },
   {
     slug: "lila-cicek-nakisli-kiz-elbise",
+    seo: {
+      title: "Lila Çiçek Nakışlı Yazlık Kız Elbise",
+      description:
+        "Göğsü çiçek nakışlı, kolsuz lila pamuklu yazlık kız elbise. 2 – 10 yaş beden, isim eklenebilir. Orimini'den WhatsApp ile sipariş.",
+    },
     code: "ORM-3003",
     name: "Lila Çiçek Nakışlı Kız Elbise",
     category: "kiz-elbise",
@@ -389,6 +442,11 @@ export const products: Product[] = [
   },
   {
     slug: "kirmizi-kadife-kiz-elbise",
+    seo: {
+      title: "Kırmızı Kadife Kız Elbise - Yılbaşı ve Kış Davetleri",
+      description:
+        "Uzun kollu, beyaz yakalı kırmızı kadife kız elbise. Yılbaşı ve kış kutlamaları için 12-18 ay – 10 yaş beden seçenekleri.",
+    },
     code: "ORM-3004",
     name: "Kırmızı Kadife Kız Elbise",
     category: "kiz-elbise",
@@ -409,6 +467,11 @@ export const products: Product[] = [
   },
   {
     slug: "isim-nakisli-hastane-cikisi-seti",
+    seo: {
+      title: "İsim Nakışlı Hastane Çıkışı Seti - 4 Parça",
+      description:
+        "Tulum, şapka, eldiven ve isim-tarih nakışlı battaniyeden oluşan %100 pamuk hastane çıkışı seti. 0-3 ve 3-6 ay. WhatsApp ile sipariş.",
+    },
     code: "ORM-4001",
     name: "İsim Nakışlı Hastane Çıkışı Seti",
     category: "yenidogan-setleri",
@@ -433,6 +496,11 @@ export const products: Product[] = [
   },
   {
     slug: "pastel-zibin-ve-body-seti",
+    seo: {
+      title: "Pastel Zıbın ve Body Seti - 3 Parça Pamuklu",
+      description:
+        "Pastel tonlarda 3 parça pamuklu zıbın ve body seti, baş harf nakışı eklenebilir. 0-3 ay – 12-18 ay beden. Orimini yenidoğan.",
+    },
     code: "ORM-4002",
     name: "Pastel Zıbın ve Body Seti",
     category: "yenidogan-setleri",

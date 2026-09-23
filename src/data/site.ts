@@ -6,7 +6,7 @@ export const site = {
   tagline: "Kişiye özel nakışlı bebek ve çocuk kıyafetleri",
   description:
     "Orimini, Adana'da el emeğiyle hazırlanan kişiye özel nakışlı salopet takımlar, kız çocuk elbiseleri ve yenidoğan setleri sunar. 0-3 aydan 10 yaşa kadar beden seçenekleri, WhatsApp ile kolay sipariş.",
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.orimini.com").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://orimini.vercel.app").replace(/\/$/, ""),
   phoneDisplay: "0506 273 59 29",
   phoneE164: "+905062735929",
   whatsappNumber: "905062735929",
@@ -18,6 +18,16 @@ export const site = {
   instagram: "",
   workingHours: "Pazartesi - Cumartesi, 09:00 - 19:00",
   freeShippingLimit: 2500,
+  // Sözleşme ve KVKK metinlerinde kullanılan satıcı bilgileri.
+  // Resmi unvan, açık adres, vergi dairesi/no ve e-posta netleşince güncelleyin.
+  legal: {
+    title: "Orimini",
+    address: "Adana, Türkiye",
+    taxInfo: "",
+    email: "",
+    kep: "",
+    updatedAt: "23.09.2026",
+  },
   keywords: [
     "kişiye özel bebek kıyafeti",
     "isim nakışlı salopet takım",
@@ -44,4 +54,11 @@ export const infoLinks = [
   { href: "/kargo-ve-iade", label: "Kargo ve İade" },
   { href: "/sikca-sorulan-sorular", label: "Sıkça Sorulan Sorular" },
   { href: "/iletisim", label: "İletişim" },
+];
+
+export const legalLinks = [
+  { href: "/mesafeli-satis-sozlesmesi", label: "Mesafeli Satış Sözleşmesi" },
+  { href: "/on-bilgilendirme-formu", label: "Ön Bilgilendirme Formu" },
+  { href: "/kvkk-aydinlatma-metni", label: "KVKK Aydınlatma Metni" },
+  { href: "/cerez-politikasi", label: "Çerez Politikası" },
 ];

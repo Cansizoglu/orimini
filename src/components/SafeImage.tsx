@@ -9,7 +9,7 @@ export function SafeImage(props: ImageProps) {
   if (failed) {
     return (
       <span className="image-fallback" role="img" aria-label={props.alt}>
-        <Image src="/images/orimini-rozet.png" alt="" width={96} height={96} />
+        <Image src="/images/orimini-logo-yazi.webp" alt="" width={140} height={43} />
       </span>
     );
   }
