@@ -1,10 +1,14 @@
+"use client";
+
+import { useSite } from "@/lib/catalog";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "./icons";
 
 export function WhatsAppFloat() {
+  const site = useSite();
   return (
     <a
-      href={whatsappUrl(questionMessage())}
+      href={whatsappUrl(site, questionMessage(site))}
       className="whatsapp-float"
       target="_blank"
       rel="noopener noreferrer"

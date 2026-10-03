@@ -1,6 +1,8 @@
 "use client";
 
+import { useSite } from "@/lib/catalog";
 import { useFavorites } from "@/lib/favorites";
+import { t } from "@/lib/site";
 import { HeartIcon } from "./icons";
 
 export function FavoriteButton({
@@ -13,6 +15,7 @@ export function FavoriteButton({
   variant?: "overlay" | "inline";
 }) {
   const { isFavorite, toggle, ready } = useFavorites();
+  const site = useSite();
   const active = ready && isFavorite(slug);
   return (
     <button
@@ -27,7 +30,7 @@ export function FavoriteButton({
       }}
     >
       <HeartIcon size={variant === "overlay" ? 20 : 22} filled={active} />
-      {variant === "inline" && <span>{active ? "Beğenildi" : "Beğen"}</span>}
+      {variant === "inline" && <span>{t(site, active ? "txt_favorited" : "txt_favorite")}</span>}
     </button>
   );
 }

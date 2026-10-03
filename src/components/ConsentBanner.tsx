@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import type { LegalSlug } from "@/content/legal";
-import { LegalModal } from "./LegalModal";
+import { Fragment, useEffect, useState } from "react";
+import { useSite } from "@/lib/catalog";
+import { t } from "@/lib/site";
+import { LegalModal, type LegalSlug } from "./LegalModal";
 
 const KEY = "orimini-onay";
 
 export function ConsentBanner() {
+  const site = useSite();
   const [visible, setVisible] = useState(false);
   const [open, setOpen] = useState<LegalSlug | null>(null);
 
@@ -35,19 +37,22 @@ export function ConsentBanner() {
       {visible && (
         <div className="consent-banner" role="dialog" aria-live="polite" aria-label="KVKK ve çerez bilgilendirmesi">
           <p>
-            Sitemizde yalnızca sepet ve favorilerinizi hatırlamak için tarayıcı depolaması kullanıyoruz. Kişisel
-            verileriniz{" "}
-            <button type="button" className="inline-link" onClick={() => setOpen("kvkk-aydinlatma-metni")}>
-              KVKK Aydınlatma Metni
-            </button>{" "}
-            ve{" "}
-            <button type="button" className="inline-link" onClick={() => setOpen("cerez-politikasi")}>
-              Çerez Politikası
-            </button>{" "}
-            kapsamında korunur.
+            {site.raw.consent_text.split(/(\{kvkk\}|\{cerez\})/).map((part, i) =>
+              part === "{kvkk}" ? (
+                <button key={i} type="button" className="inline-link" onClick={() => setOpen("kvkk-aydinlatma-metni")}>
+                  KVKK Aydınlatma Metni
+                </button>
+              ) : part === "{cerez}" ? (
+                <button key={i} type="button" className="inline-link" onClick={() => setOpen("cerez-politikasi")}>
+                  Çerez Politikası
+                </button>
+              ) : (
+                <Fragment key={i}>{part}</Fragment>
+              ),
+            )}
           </p>
           <button type="button" className="btn btn-primary btn-small" onClick={accept}>
-            Anladım
+            {t(site, "txt_consent_accept")}
           </button>
         </div>
       )}

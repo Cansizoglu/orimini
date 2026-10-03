@@ -147,3 +147,22 @@ export function StarIcon({ size = 18, className, fill = 1 }: IconProps & { fill?
     </svg>
   );
 }
+
+// Admin panelinde yazılan ikon adlarını bileşene çevirir.
+export const iconByName = {
+  nakis: NeedleIcon,
+  kalp: HeartIcon,
+  kargo: TruckIcon,
+  kalkan: ShieldIcon,
+  whatsapp: WhatsAppIcon,
+  cetvel: RulerIcon,
+  telefon: PhoneIcon,
+  konum: PinIcon,
+  saat: ClockIcon,
+  yildiz: StarIcon,
+} as const;
+
+export function iconFor(name: string | undefined, fallback: keyof typeof iconByName = "kalp") {
+  const key = (name ?? "").toLocaleLowerCase("tr-TR").replace("ş", "s").replace("ı", "i") as keyof typeof iconByName;
+  return iconByName[key] ?? iconByName[fallback];
+}

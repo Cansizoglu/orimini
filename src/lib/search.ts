@@ -1,4 +1,5 @@
-import { categories, products, SIZES, type Product } from "@/data/products";
+import { stripHtml } from "./site";
+import type { Category, Product, Size } from "./types";
 
 // Türkçe karakter ve büyük/küçük harf farkını yok sayan sadeleştirme.
 export function normalize(text: string) {
@@ -15,19 +16,33 @@ export function normalize(text: string) {
     .trim();
 }
 
-const index = products.map((p) => {
-  const category = categories.find((c) => c.slug === p.category);
-  const sizes = SIZES.filter((s) => p.sizes.includes(s.id)).map((s) => s.label);
-  return {
-    product: p,
-    title: normalize(p.name),
-    text: normalize(
-      [p.name, p.code, p.color, category?.name, p.shortDescription, ...p.description, ...p.setContents, p.fabric, ...sizes].join(" "),
-    ),
-  };
-});
+export type SearchIndex = { product: Product; title: string; text: string }[];
 
-export function searchProducts(query: string, limit?: number): Product[] {
+export function buildIndex(products: Product[], categories: Category[], sizes: Size[]): SearchIndex {
+  return products.map((p) => {
+    const category = categories.find((c) => c.slug === p.category);
+    const sizeLabels = sizes.filter((s) => p.sizes.includes(s.id)).map((s) => s.label);
+    return {
+      product: p,
+      title: normalize(p.name),
+      text: normalize(
+        [
+          p.name,
+          p.code,
+          p.color,
+          category?.name,
+          p.shortDescription,
+          stripHtml(p.description),
+          ...p.setContents,
+          p.fabric,
+          ...sizeLabels,
+        ].join(" "),
+      ),
+    };
+  });
+}
+
+export function searchProducts(index: SearchIndex, query: string, limit?: number): Product[] {
   const terms = normalize(query).split(/\s+/).filter(Boolean);
   if (terms.length === 0) return [];
   const scored = index

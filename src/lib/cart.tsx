@@ -1,7 +1,8 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { getProduct, type Product } from "@/data/products";
+import { useCatalog } from "./catalog";
+import type { Product } from "./types";
 
 export type CartItem = {
   id: string;
@@ -26,7 +27,7 @@ type CartContextValue = {
 const STORAGE_KEY = "orimini-sepet";
 const CartContext = createContext<CartContextValue | null>(null);
 
-function readStorage(): CartItem[] {
+function readStorage(getProduct: (slug: string) => Product | undefined): CartItem[] {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     const parsed = raw ? (JSON.parse(raw) as CartItem[]) : [];
@@ -39,12 +40,14 @@ function readStorage(): CartItem[] {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [ready, setReady] = useState(false);
+  const { getProduct } = useCatalog();
 
   useEffect(() => {
     // Sepet yalnızca tarayıcıda tutulur; sunucu render'ında boş başlar.
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setItems(readStorage());
+    setItems(readStorage(getProduct));
     setReady(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -95,7 +98,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       remove,
       clear,
     };
-  }, [items, ready, add, update, remove, clear]);
+  }, [items, ready, add, update, remove, clear, getProduct]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

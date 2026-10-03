@@ -1,25 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import type { Review } from "@/data/reviews";
-import { site } from "@/data/site";
+import { useSite } from "@/lib/catalog";
+import { createClient } from "@/lib/supabase/client";
+import { hasSupabase } from "@/lib/supabase/config";
+import { t } from "@/lib/site";
+import type { Review } from "@/lib/types";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { StarIcon, WhatsAppIcon } from "./icons";
 import { Stars } from "./Stars";
 
-const labels = ["", "Hiç beğenmedim", "Beğenmedim", "Fena değil", "Beğendim", "Çok beğendim"];
-
 export function ProductReviews({
+  productSlug,
   productName,
   productCode,
   reviews,
   average,
 }: {
+  productSlug: string;
   productName: string;
   productCode: string;
   reviews: Review[];
   average: number;
 }) {
+  const site = useSite();
+  const labels = ["", ...t(site, "txt_review_rating_labels").split("|").map((l) => l.trim())];
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [city, setCity] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [name, setName] = useState("");
@@ -31,32 +39,59 @@ export function ProductReviews({
     count: reviews.filter((r) => r.rating === star).length,
   }));
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!rating) return setError("Lütfen yıldız seçerek puan verin.");
-    if (!name.trim() || comment.trim().length < 5) return setError("Lütfen adınızı ve yorumunuzu yazın.");
-    setError(null);
+  const sendViaWhatsApp = () => {
     const text = [
-      `Merhaba ${site.name}, ürün yorumu göndermek istiyorum:`,
+      t(site, "wa_review"),
       "",
-      `Ürün: ${productName} (${productCode})`,
-      `Puan: ${"★".repeat(rating)}${"☆".repeat(5 - rating)} (${rating}/5)`,
-      `Ad: ${name.trim()}`,
-      `Yorum: ${comment.trim()}`,
+      `${t(site, "wa_lbl_product")}: ${productName} (${productCode})`,
+      `${t(site, "wa_lbl_rating")}: ${"★".repeat(rating)}${"☆".repeat(5 - rating)} (${rating}/5)`,
+      `${t(site, "wa_lbl_name")}: ${name.trim()}`,
+      `${t(site, "wa_lbl_comment")}: ${comment.trim()}`,
     ].join("\n");
-    window.open(whatsappUrl(text), "_blank", "noopener,noreferrer");
+    window.open(whatsappUrl(site, text), "_blank", "noopener,noreferrer");
+  };
+
+  // Yorum admin paneline onay bekleyen olarak düşer; veritabanı yoksa WhatsApp ile gönderilir.
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!rating) return setError(t(site, "txt_review_error_rating"));
+    if (name.trim().length < 2 || comment.trim().length < 5) return setError(t(site, "txt_review_error_text"));
+    setError(null);
+    if (!hasSupabase) return sendViaWhatsApp();
+    setSending(true);
+    const { error: insertError } = await createClient()
+      .from("reviews")
+      .insert({
+        product_slug: productSlug,
+        author: name.trim(),
+        city: city.trim() || null,
+        rating,
+        comment: comment.trim(),
+        is_approved: false,
+      });
+    setSending(false);
+    if (insertError) {
+      setError(t(site, "txt_review_error_send"));
+      sendViaWhatsApp();
+      return;
+    }
+    setSent(true);
+    setRating(0);
+    setName("");
+    setCity("");
+    setComment("");
   };
 
   return (
     <section className="reviews" aria-labelledby="yorumlar">
       <div className="section-head">
-        <h2 id="yorumlar">Ürün yorumları</h2>
+        <h2 id="yorumlar">{t(site, "txt_reviews_title")}</h2>
       </div>
       <div className="reviews-layout">
         <div className="reviews-summary">
           <p className="reviews-score">{reviews.length ? average.toLocaleString("tr-TR") : "–"}</p>
           <Stars value={average} size={22} />
-          <p className="field-hint">{reviews.length} değerlendirme</p>
+          <p className="field-hint">{reviews.length} {t(site, "txt_reviews_count")}</p>
           <ul className="reviews-bars">
             {counts.map(({ star, count }) => (
               <li key={star}>
@@ -87,13 +122,13 @@ export function ProductReviews({
               ))}
             </ul>
           ) : (
-            <p className="reviews-empty">Bu ürün için henüz yorum yok. İlk yorumu siz yazın!</p>
+            <p className="reviews-empty">{t(site, "txt_reviews_empty")}</p>
           )}
 
           <form className="review-form" onSubmit={submit} noValidate>
-            <h3>Yorum yazın</h3>
+            <h3>{t(site, "txt_review_form_title")}</h3>
             <fieldset className="star-picker">
-              <legend>Puanınız</legend>
+              <legend>{t(site, "txt_review_rating")}</legend>
               <div onMouseLeave={() => setHover(0)}>
                 {[1, 2, 3, 4, 5].map((i) => (
                   <label key={i} onMouseEnter={() => setHover(i)}>
@@ -112,11 +147,15 @@ export function ProductReviews({
               </div>
             </fieldset>
             <div className="field">
-              <label htmlFor="yorum-ad">Adınız</label>
+              <label htmlFor="yorum-ad">{t(site, "txt_review_name")}</label>
               <input id="yorum-ad" value={name} maxLength={40} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="field">
-              <label htmlFor="yorum-metin">Yorumunuz</label>
+              <label htmlFor="yorum-sehir">{t(site, "txt_review_city")}</label>
+              <input id="yorum-sehir" value={city} maxLength={40} onChange={(e) => setCity(e.target.value)} />
+            </div>
+            <div className="field">
+              <label htmlFor="yorum-metin">{t(site, "txt_review_comment")}</label>
               <textarea
                 id="yorum-metin"
                 rows={3}
@@ -130,10 +169,15 @@ export function ProductReviews({
                 {error}
               </p>
             )}
-            <button type="submit" className="btn btn-outline">
-              <WhatsAppIcon size={18} /> Yorumu gönder
+            {sent && (
+              <p className="form-success" role="status">
+                {t(site, "txt_review_success")}
+              </p>
+            )}
+            <button type="submit" className="btn btn-outline" disabled={sending}>
+              {!hasSupabase && <WhatsAppIcon size={18} />} {sending ? t(site, "txt_review_sending") : t(site, "txt_review_submit")}
             </button>
-            <p className="field-hint">Yorumunuz WhatsApp ile bize ulaşır, onaylandıktan sonra burada yayınlanır.</p>
+            <p className="field-hint">{t(site, "reviews_note")}</p>
           </form>
         </div>
       </div>

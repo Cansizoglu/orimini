@@ -1,25 +1,31 @@
 import type { Metadata } from "next";
-import { legalDocs, type LegalSlug } from "@/content/legal";
-import { site } from "@/data/site";
+import { notFound } from "next/navigation";
+import { getContent } from "@/lib/content";
+import { fill, t } from "@/lib/site";
 import { Breadcrumbs } from "./Breadcrumbs";
+import { RichText } from "./RichText";
 
-export function legalMetadata(slug: LegalSlug): Metadata {
-  const doc = legalDocs[slug];
+export async function legalMetadata(slug: string): Promise<Metadata> {
+  const { site, pages } = await getContent();
+  const page = pages.find((p) => p.slug === slug);
+  if (!page) return {};
   return {
-    title: doc.title,
-    description: doc.description,
+    title: fill(page.seoTitle || page.title, site),
+    description: fill(page.seoDescription, site) || undefined,
     alternates: { canonical: `/${slug}` },
   };
 }
 
-export function LegalPage({ slug }: { slug: LegalSlug }) {
-  const { title, Body } = legalDocs[slug];
+export async function LegalPage({ slug }: { slug: string }) {
+  const { site, pages } = await getContent();
+  const page = pages.find((p) => p.slug === slug);
+  if (!page) notFound();
   return (
     <div className="container prose legal">
-      <Breadcrumbs items={[{ name: title, href: `/${slug}` }]} />
-      <h1>{title}</h1>
-      <p className="field-hint">Son güncelleme: {site.legal.updatedAt}</p>
-      <Body />
+      <Breadcrumbs items={[{ name: page.title, href: `/${slug}` }]} />
+      <h1>{fill(page.title, site)}</h1>
+      <p className="field-hint">{t(site, "txt_last_updated")}: {site.legal.updatedAt}</p>
+      <RichText html={page.content} site={site} />
     </div>
   );
 }

@@ -4,10 +4,9 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
+      { protocol: "https", hostname: "images.unsplash.com" },
+      // Admin panelinden yüklenen görseller (Supabase Storage)
+      { protocol: "https", hostname: "*.supabase.co" },
     ],
   },
 };

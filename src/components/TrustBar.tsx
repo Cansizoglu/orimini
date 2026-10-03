@@ -1,18 +1,19 @@
-import { site } from "@/data/site";
-import { formatPrice } from "@/data/products";
-import { HeartIcon, NeedleIcon, TruckIcon, WhatsAppIcon } from "./icons";
+import { fill, splitLine } from "@/lib/site";
+import type { Site } from "@/lib/types";
+import { iconFor } from "./icons";
 
-const items = [
-  { icon: NeedleIcon, title: "Ücretsiz isim nakışı", text: "İsim ve tarih nakışı fiyata dahil" },
-  { icon: HeartIcon, title: "El emeği, özenli dikim", text: `${site.city} atölyemizde hazırlanır` },
-  { icon: TruckIcon, title: "Türkiye'ye kargo", text: `${formatPrice(site.freeShippingLimit)} üzeri ücretsiz` },
-  { icon: WhatsAppIcon, title: "WhatsApp ile sipariş", text: "Hızlı yanıt, kolay teyit" },
-];
+const fallbackIcons = ["nakis", "kalp", "kargo", "whatsapp"] as const;
 
-export function TrustBar() {
+// Her madde "ikon | başlık | açıklama" ya da "başlık | açıklama" biçimindedir.
+export function TrustBar({ items, site }: { items: string[]; site: Site }) {
+  const rows = items.map((line, i) => {
+    const parts = splitLine(fill(line, site));
+    const [icon, title, text] = parts.length >= 3 ? parts : [fallbackIcons[i % 4], parts[0], parts[1] ?? ""];
+    return { Icon: iconFor(icon, fallbackIcons[i % 4]), title, text };
+  });
   return (
     <ul className="trust-bar">
-      {items.map(({ icon: Icon, title, text }) => (
+      {rows.map(({ Icon, title, text }) => (
         <li key={title}>
           <span className="trust-icon">
             <Icon size={26} />

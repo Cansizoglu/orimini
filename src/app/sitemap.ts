@@ -1,10 +1,19 @@
 import type { MetadataRoute } from "next";
-import { categories, products } from "@/data/products";
-import { site } from "@/data/site";
+import { getContent } from "@/lib/content";
+import { absoluteUrl } from "@/lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const noIndex = new Set(["anasayfa", "sepet", "favoriler"]);
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { site, pages, categories, products } = await getContent();
   const now = new Date();
-  const staticPages = ["", "/urunler", "/hakkimizda", "/iletisim", "/beden-rehberi", "/kargo-ve-iade", "/sikca-sorulan-sorular", "/mesafeli-satis-sozlesmesi", "/on-bilgilendirme-formu", "/kvkk-aydinlatma-metni", "/cerez-politikasi"];
+  const staticPages = [
+    "",
+    "/urunler",
+    ...pages
+      .filter((p) => !noIndex.has(p.slug) && p.slug !== "urunler")
+      .map((p) => (p.system ? `/${p.slug}` : `/sayfa/${p.slug}`)),
+  ];
   return [
     ...staticPages.map((path) => ({
       url: `${site.url}${path}`,
@@ -23,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.9,
-      images: p.images.map((i) => (i.src.startsWith("http") ? i.src : `${site.url}${i.src}`)),
+      images: p.images.map((i) => absoluteUrl(site, i.src)),
     })),
   ];
 }
