@@ -44,6 +44,10 @@ Kurulum:
 1. Supabase SQL Editor'de sırasıyla `supabase/schema.sql` ve `supabase/seed.sql` dosyalarını çalıştırın.
 2. Authentication > Users'tan admin kullanıcısını oluşturun, ardından yetki verin:
    `insert into admin_users (user_id, email) select id, email from auth.users where email = 'ornek@mail.com';`
-3. Vercel'de `NEXT_PUBLIC_SUPABASE_URL` ve `NEXT_PUBLIC_SUPABASE_ANON_KEY` ortam değişkenlerini tanımlayın.
+3. Bağlantı bilgileri `src/lib/supabase/config.ts` içinde varsayılan olarak yazılıdır (proje `ldsjtlczbwzjwolgygti`).
+   Başka bir projeye geçmek için Vercel'de `NEXT_PUBLIC_SUPABASE_URL` ve `NEXT_PUBLIC_SUPABASE_ANON_KEY` tanımlayın.
+
+Şema ve kurulum verisi bu projeye 2026-10-03'te yüklendi; yalnızca 2. adım (admin kullanıcısı) kaldı.
+Admin şifresi panelin Dashboard sayfasından değiştirilebilir.
 
 `src/data` içeriği değişirse `npx tsx scripts/generate-seed.ts` ile `supabase/seed.sql` yeniden üretilir.

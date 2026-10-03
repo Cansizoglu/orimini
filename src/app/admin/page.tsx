@@ -2,12 +2,22 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { ShoppingBag, FolderTree, Megaphone, FileText, HelpCircle, MessageSquare, Settings, Home, AlertTriangle } from 'lucide-react'
+import { ShoppingBag, FolderTree, Megaphone, FileText, HelpCircle, MessageSquare, Settings, Home, AlertTriangle, KeyRound } from 'lucide-react'
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState<Record<string, number>>({})
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null)
   const [loading, setLoading] = useState(true)
+  const [password, setPassword] = useState('')
+  const [pwMessage, setPwMessage] = useState<string | null>(null)
+
+  const changePassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (password.length < 8) { setPwMessage('Şifre en az 8 karakter olmalı.'); return }
+    const { error } = await createClient().auth.updateUser({ password })
+    setPwMessage(error ? 'Şifre değiştirilemedi: ' + error.message : 'Şifreniz değiştirildi.')
+    if (!error) setPassword('')
+  }
 
   useEffect(() => {
     const load = async () => {
@@ -83,6 +93,13 @@ export default function AdminDashboard() {
           </a>
         ))}
       </div>
+
+      <form onSubmit={changePassword} className="admin-card mt-8 max-w-md">
+        <h2 className="font-bold text-slate-700 mb-3 flex items-center gap-2"><KeyRound size={18} /> Şifre değiştir</h2>
+        <input type="password" className="admin-input" placeholder="Yeni şifre (en az 8 karakter)" autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        {pwMessage && <p className="text-sm mt-2 text-slate-600">{pwMessage}</p>}
+        <button type="submit" className="admin-btn admin-btn-primary mt-3">Şifreyi kaydet</button>
+      </form>
     </div>
   )
 }

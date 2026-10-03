@@ -12,7 +12,7 @@ begin
   new.updated_at = now();
   return new;
 end;
-$$ language plpgsql;
+$$ language plpgsql set search_path = public;
 
 -- =============================================
 -- ADMIN KULLANICILARI
@@ -40,7 +40,7 @@ create policy "admin_users_self_read" on admin_users for select using (user_id =
 
 -- Ortak kurulum: updated_at tetikleyicisi + herkese okuma + admine yazma.
 create or replace function public.orimini_setup_table(t text, public_read boolean default true)
-returns void language plpgsql as $$
+returns void language plpgsql set search_path = public as $$
 begin
   execute format('alter table %I enable row level security', t);
   execute format('drop trigger if exists %I on %I', 'set_' || t || '_updated_at', t);
