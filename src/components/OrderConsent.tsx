@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { LegalSlug } from "@/content/legal";
-import { LegalModal } from "./LegalModal";
+import { LegalModal, type LegalSlug } from "./LegalModal";
 
 export function OrderConsent({
   checked,

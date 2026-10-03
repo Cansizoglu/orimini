@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { site } from "@/data/site";
+import { getSite } from "@/lib/content";
 import { JsonLd } from "./JsonLd";
 
 export type Crumb = { name: string; href: string };
 
-export function Breadcrumbs({ items }: { items: Crumb[] }) {
+export async function Breadcrumbs({ items }: { items: Crumb[] }) {
+  const site = await getSite();
   const all = [{ name: "Anasayfa", href: "/" }, ...items];
   return (
     <>

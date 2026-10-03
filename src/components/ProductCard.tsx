@@ -1,18 +1,17 @@
+"use client";
+
 import Link from "next/link";
-import { formatPrice, getCategory, SIZES, type Product } from "@/data/products";
-import { getRatingSummary } from "@/data/reviews";
+import { useCatalog } from "@/lib/catalog";
+import { findCategory, formatPrice, sizeRange } from "@/lib/site";
+import type { Product } from "@/lib/types";
 import { FavoriteButton } from "./FavoriteButton";
 import { SafeImage } from "./SafeImage";
 import { Stars } from "./Stars";
 
-export function sizeRange(product: Product) {
-  const labels = SIZES.filter((s) => product.sizes.includes(s.id)).map((s) => s.label);
-  return labels.length > 1 ? `${labels[0]} – ${labels[labels.length - 1]}` : labels[0];
-}
-
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
+  const { categories, sizes, ratings } = useCatalog();
   const cover = product.images[0];
-  const rating = getRatingSummary(product.slug);
+  const rating = ratings[product.slug] ?? { count: 0, average: 0 };
   return (
     <article className="product-card">
       <Link href={`/urun/${product.slug}`} className="product-card-link">
@@ -24,7 +23,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             priority={priority}
           />
-          {product.badges && product.badges.length > 0 && (
+          {product.badges.length > 0 && (
             <div className="badges">
               {product.badges.slice(0, 2).map((b) => (
                 <span key={b} className={`badge badge-${b === "İndirim" ? "sale" : "soft"}`}>
@@ -36,9 +35,9 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           <FavoriteButton slug={product.slug} name={product.name} />
         </div>
         <div className="product-card-body">
-          <p className="product-card-cat">{getCategory(product.category)?.shortName}</p>
+          <p className="product-card-cat">{findCategory(categories, product.category)?.shortName}</p>
           <h3 className="product-card-title">{product.name}</h3>
-          <p className="product-card-sizes">{sizeRange(product)}</p>
+          <p className="product-card-sizes">{sizeRange(sizes, product)}</p>
           <p className="product-card-rating">
             <Stars value={rating.average} size={14} />
             <span>({rating.count})</span>

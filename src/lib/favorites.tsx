@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { getProduct } from "@/data/products";
+import { useCatalog } from "./catalog";
 
 type FavoritesContextValue = {
   slugs: string[];
@@ -16,6 +16,7 @@ const FavoritesContext = createContext<FavoritesContextValue | null>(null);
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
   const [slugs, setSlugs] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
+  const { getProduct } = useCatalog();
 
   useEffect(() => {
     try {
@@ -27,6 +28,7 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
       setSlugs([]);
     }
     setReady(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

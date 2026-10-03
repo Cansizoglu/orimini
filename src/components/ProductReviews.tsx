@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { Review } from "@/data/reviews";
-import { site } from "@/data/site";
+import { useSite } from "@/lib/catalog";
+import { createClient } from "@/lib/supabase/client";
+import { hasSupabase } from "@/lib/supabase/config";
+import type { Review } from "@/lib/types";
 import { whatsappUrl } from "@/lib/whatsapp";
 import { StarIcon, WhatsAppIcon } from "./icons";
 import { Stars } from "./Stars";
@@ -10,16 +12,22 @@ import { Stars } from "./Stars";
 const labels = ["", "Hiç beğenmedim", "Beğenmedim", "Fena değil", "Beğendim", "Çok beğendim"];
 
 export function ProductReviews({
+  productSlug,
   productName,
   productCode,
   reviews,
   average,
 }: {
+  productSlug: string;
   productName: string;
   productCode: string;
   reviews: Review[];
   average: number;
 }) {
+  const site = useSite();
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [city, setCity] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [name, setName] = useState("");
@@ -31,11 +39,7 @@ export function ProductReviews({
     count: reviews.filter((r) => r.rating === star).length,
   }));
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!rating) return setError("Lütfen yıldız seçerek puan verin.");
-    if (!name.trim() || comment.trim().length < 5) return setError("Lütfen adınızı ve yorumunuzu yazın.");
-    setError(null);
+  const sendViaWhatsApp = () => {
     const text = [
       `Merhaba ${site.name}, ürün yorumu göndermek istiyorum:`,
       "",
@@ -44,7 +48,38 @@ export function ProductReviews({
       `Ad: ${name.trim()}`,
       `Yorum: ${comment.trim()}`,
     ].join("\n");
-    window.open(whatsappUrl(text), "_blank", "noopener,noreferrer");
+    window.open(whatsappUrl(site, text), "_blank", "noopener,noreferrer");
+  };
+
+  // Yorum admin paneline onay bekleyen olarak düşer; veritabanı yoksa WhatsApp ile gönderilir.
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!rating) return setError("Lütfen yıldız seçerek puan verin.");
+    if (name.trim().length < 2 || comment.trim().length < 5) return setError("Lütfen adınızı ve yorumunuzu yazın.");
+    setError(null);
+    if (!hasSupabase) return sendViaWhatsApp();
+    setSending(true);
+    const { error: insertError } = await createClient()
+      .from("reviews")
+      .insert({
+        product_slug: productSlug,
+        author: name.trim(),
+        city: city.trim() || null,
+        rating,
+        comment: comment.trim(),
+        is_approved: false,
+      });
+    setSending(false);
+    if (insertError) {
+      setError("Yorum gönderilemedi, lütfen WhatsApp ile iletin.");
+      sendViaWhatsApp();
+      return;
+    }
+    setSent(true);
+    setRating(0);
+    setName("");
+    setCity("");
+    setComment("");
   };
 
   return (
@@ -116,6 +151,10 @@ export function ProductReviews({
               <input id="yorum-ad" value={name} maxLength={40} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="field">
+              <label htmlFor="yorum-sehir">Şehir (isteğe bağlı)</label>
+              <input id="yorum-sehir" value={city} maxLength={40} onChange={(e) => setCity(e.target.value)} />
+            </div>
+            <div className="field">
               <label htmlFor="yorum-metin">Yorumunuz</label>
               <textarea
                 id="yorum-metin"
@@ -130,10 +169,15 @@ export function ProductReviews({
                 {error}
               </p>
             )}
-            <button type="submit" className="btn btn-outline">
-              <WhatsAppIcon size={18} /> Yorumu gönder
+            {sent && (
+              <p className="form-success" role="status">
+                Teşekkürler! Yorumunuz bize ulaştı, onaylandıktan sonra burada yayınlanacak.
+              </p>
+            )}
+            <button type="submit" className="btn btn-outline" disabled={sending}>
+              {!hasSupabase && <WhatsAppIcon size={18} />} {sending ? "Gönderiliyor…" : "Yorumu gönder"}
             </button>
-            <p className="field-hint">Yorumunuz WhatsApp ile bize ulaşır, onaylandıktan sonra burada yayınlanır.</p>
+            <p className="field-hint">{site.raw.reviews_note}</p>
           </form>
         </div>
       </div>

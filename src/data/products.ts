@@ -1,5 +1,5 @@
-// Örnek ürün verisi. Yönetim paneli / veritabanı eklenene kadar ürünler
-// bu dosyadan okunur. Fiyatlar örnektir, gerçek fiyatlarla güncelleyin.
+// İlk kurulum verisi. Site artık ürünleri admin panelinden (Supabase) okur;
+// bu dosya veritabanı boşken/bağlı değilken yedek olarak ve supabase/seed.sql üretmek için kullanılır.
 
 export type SizeId =
   | "0-3-ay"
@@ -37,10 +37,6 @@ export const SIZES: { id: SizeId; label: string; group: "bebek" | "cocuk" }[] = 
 const ALL_SIZES = SIZES.map((s) => s.id);
 const sizesBetween = (from: SizeId, to: SizeId) =>
   ALL_SIZES.slice(ALL_SIZES.indexOf(from), ALL_SIZES.indexOf(to) + 1);
-
-export function sizeLabel(id: string) {
-  return SIZES.find((s) => s.id === id)?.label ?? id;
-}
 
 export type Category = {
   slug: string;
@@ -546,29 +542,3 @@ export const products: Product[] = [
     personalization: nameEmbroidery,
   },
 ];
-
-export function getProduct(slug: string) {
-  return products.find((p) => p.slug === slug);
-}
-
-export function getCategory(slug: string) {
-  return categories.find((c) => c.slug === slug);
-}
-
-export function getProductsByCategory(slug: string) {
-  return products.filter((p) => p.category === slug);
-}
-
-export function getRelatedProducts(product: Product, limit = 4) {
-  const same = products.filter((p) => p.category === product.category && p.slug !== product.slug);
-  const others = products.filter((p) => p.category !== product.category);
-  return [...same, ...others].slice(0, limit);
-}
-
-export function formatPrice(value: number) {
-  return new Intl.NumberFormat("tr-TR", {
-    style: "currency",
-    currency: "TRY",
-    maximumFractionDigits: 0,
-  }).format(value);
-}

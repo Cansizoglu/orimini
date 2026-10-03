@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { SIZES, type Product } from "@/data/products";
 import { useCart } from "@/lib/cart";
+import { useCatalog } from "@/lib/catalog";
+import type { Product } from "@/lib/types";
 import { questionMessage, singleOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 import { BagIcon, WhatsAppIcon } from "./icons";
 import { OrderConsent } from "./OrderConsent";
 
 export function ProductOrderPanel({ product }: { product: Product }) {
+  const { site, categories, sizes } = useCatalog();
   const searchParams = useSearchParams();
   const initialSize = searchParams.get("beden");
   const [size, setSize] = useState<string | null>(
-    initialSize && product.sizes.includes(initialSize as Product["sizes"][number]) ? initialSize : null,
+    initialSize && product.sizes.includes(initialSize) ? initialSize : null,
   );
   const [quantity, setQuantity] = useState(1);
   const [personalization, setPersonalization] = useState("");
@@ -43,7 +45,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
   };
 
   const orderHref = size && consent
-    ? whatsappUrl(singleOrderMessage({ product, size, quantity, personalization, note }))
+    ? whatsappUrl(site, singleOrderMessage(site, { categories, sizes }, { product, size, quantity, personalization, note }))
     : undefined;
 
   return (
@@ -53,7 +55,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
           Yaş / Beden <Link href="/beden-rehberi">Beden rehberi</Link>
         </legend>
         <div className="size-options">
-          {SIZES.map((s) => {
+          {sizes.map((s) => {
             const available = product.sizes.includes(s.id);
             return (
               <label key={s.id} className={`size-option${available ? "" : " is-disabled"}`}>
@@ -98,7 +100,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
           id="not"
           rows={2}
           maxLength={300}
-          placeholder="Örn: Teslim tarihi, renk tercihi, özel istekler"
+          placeholder={site.raw.order_note_placeholder}
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />
@@ -160,7 +162,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
 
       <a
         className="text-link ask-link"
-        href={whatsappUrl(questionMessage(product))}
+        href={whatsappUrl(site, questionMessage(site, product))}
         target="_blank"
         rel="noopener noreferrer"
       >

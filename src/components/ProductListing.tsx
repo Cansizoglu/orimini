@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { SIZES, type Product } from "@/data/products";
+import { useCatalog } from "@/lib/catalog";
+import type { Product } from "@/lib/types";
 import { ProductCard } from "./ProductCard";
 
 type Sort = "onerilen" | "fiyat-artan" | "fiyat-azalan";
@@ -16,16 +17,17 @@ export function ProductListing({
   const [size, setSize] = useState("");
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState<Sort>("onerilen");
+  const { sizes } = useCatalog();
 
   const availableSizes = useMemo(
-    () => SIZES.filter((s) => products.some((p) => p.sizes.includes(s.id))),
-    [products],
+    () => sizes.filter((s) => products.some((p) => p.sizes.includes(s.id))),
+    [products, sizes],
   );
 
   const visible = useMemo(() => {
     const list = products.filter(
       (p) =>
-        (!size || p.sizes.includes(size as Product["sizes"][number])) && (!category || p.category === category),
+        (!size || p.sizes.includes(size)) && (!category || p.category === category),
     );
     if (sort === "fiyat-artan") return [...list].sort((a, b) => a.price - b.price);
     if (sort === "fiyat-azalan") return [...list].sort((a, b) => b.price - a.price);

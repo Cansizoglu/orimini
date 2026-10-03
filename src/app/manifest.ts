@@ -1,16 +1,17 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/data/site";
+import { getSite } from "@/lib/content";
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const site = await getSite();
   return {
     name: `${site.name} - ${site.tagline}`,
     short_name: site.name,
     description: site.description,
     start_url: "/",
     display: "standalone",
-    background_color: "#F7F1E8",
-    theme_color: "#F7F1E8",
+    background_color: site.themeColor,
+    theme_color: site.themeColor,
     lang: "tr",
-    icons: [{ src: "/icon.png", sizes: "192x192", type: "image/png" }],
+    icons: [{ src: site.favicon || "/icon.png", sizes: "192x192", type: "image/png" }],
   };
 }

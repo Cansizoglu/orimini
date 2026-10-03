@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useId, useMemo, useRef, useState } from "react";
-import { formatPrice } from "@/data/products";
-import { searchProducts } from "@/lib/search";
+import { useCatalog } from "@/lib/catalog";
+import { buildIndex, searchProducts } from "@/lib/search";
+import { formatPrice } from "@/lib/site";
 import { SafeImage } from "./SafeImage";
 import { SearchIcon } from "./icons";
 
@@ -14,7 +15,12 @@ export function SearchBox({ className = "" }: { className?: string }) {
   const router = useRouter();
   const listId = useId();
   const blurTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const results = useMemo(() => (query.trim().length >= 2 ? searchProducts(query, 5) : []), [query]);
+  const { products, categories, sizes } = useCatalog();
+  const index = useMemo(() => buildIndex(products, categories, sizes), [products, categories, sizes]);
+  const results = useMemo(
+    () => (query.trim().length >= 2 ? searchProducts(index, query, 5) : []),
+    [index, query],
+  );
   const showList = focused && query.trim().length >= 2;
 
   return (

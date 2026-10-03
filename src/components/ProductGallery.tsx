@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { ProductImage } from "@/data/products";
+import type { ProductImage } from "@/lib/types";
 import { SafeImage } from "./SafeImage";
 import { CloseIcon } from "./icons";
 

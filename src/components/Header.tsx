@@ -4,14 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { navLinks, site } from "@/data/site";
 import { useCart } from "@/lib/cart";
+import { useSite } from "@/lib/catalog";
 import { useFavorites } from "@/lib/favorites";
+import { isOn } from "@/lib/site";
+import type { MenuLink } from "@/lib/types";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
 import { SearchBox } from "./SearchBox";
 import { BagIcon, CloseIcon, HeartIcon, MenuIcon, WhatsAppIcon } from "./icons";
 
-export function Header() {
+export function Header({ menu }: { menu: MenuLink[] }) {
+  const site = useSite();
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { count, ready } = useCart();
@@ -20,14 +23,21 @@ export function Header() {
 
   return (
     <header className="site-header">
-      <div className="announcement">
-        <p>
-          Adana&apos;dan tüm Türkiye&apos;ye kargo · İsim nakışı ücretsiz ·{" "}
-          <a href={whatsappUrl(questionMessage())} target="_blank" rel="noopener noreferrer">
-            WhatsApp: {site.phoneDisplay}
-          </a>
-        </p>
-      </div>
+      {isOn(site, "announcement_active") && (
+        <div className="announcement">
+          <p>
+            {site.raw.announcement_text}
+            {isOn(site, "announcement_show_whatsapp") && (
+              <>
+                {site.raw.announcement_text ? " · " : ""}
+                <a href={whatsappUrl(site, questionMessage(site))} target="_blank" rel="noopener noreferrer">
+                  WhatsApp: {site.phoneDisplay}
+                </a>
+              </>
+            )}
+          </p>
+        </div>
+      )}
       <div className="container header-bar">
         <button
           type="button"
@@ -42,7 +52,7 @@ export function Header() {
 
         <Link href="/" className="brand" aria-label={`${site.name} anasayfa`} onClick={close}>
           <Image
-            src="/images/orimini-logo-yazi.webp"
+            src={site.logo}
             alt={site.name}
             width={720}
             height={221}
@@ -55,7 +65,7 @@ export function Header() {
 
         <div className="header-actions">
           <a
-            href={whatsappUrl(questionMessage())}
+            href={whatsappUrl(site, questionMessage(site))}
             className="icon-button whatsapp-link"
             target="_blank"
             rel="noopener noreferrer"
@@ -76,7 +86,7 @@ export function Header() {
 
       <nav id="ana-menu" className={`main-nav${open ? " is-open" : ""}`} aria-label="Ana menü">
         <ul className="container">
-          {navLinks.map((l) => (
+          {menu.map((l) => (
             <li key={l.href}>
               <Link href={l.href} onClick={close} aria-current={pathname === l.href ? "page" : undefined}>
                 {l.label}
