@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useCatalog } from "@/lib/catalog";
-import { findCategory, formatPrice, sizeRange } from "@/lib/site";
+import { findCategory, formatPrice, sizeRange, t } from "@/lib/site";
 import type { Product } from "@/lib/types";
 import { FavoriteButton } from "./FavoriteButton";
 import { SafeImage } from "./SafeImage";
 import { Stars } from "./Stars";
 
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
-  const { categories, sizes, ratings } = useCatalog();
+  const { categories, sizes, ratings, site } = useCatalog();
   const cover = product.images[0];
   const rating = ratings[product.slug] ?? { count: 0, average: 0 };
   return (
@@ -26,7 +26,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
           {product.badges.length > 0 && (
             <div className="badges">
               {product.badges.slice(0, 2).map((b) => (
-                <span key={b} className={`badge badge-${b === "İndirim" ? "sale" : "soft"}`}>
+                <span key={b} className={`badge badge-${b === t(site, "txt_sale_badge") ? "sale" : "soft"}`}>
                   {b}
                 </span>
               ))}

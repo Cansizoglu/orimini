@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { useCatalog } from "@/lib/catalog";
+import { t } from "@/lib/site";
 import type { Product } from "@/lib/types";
 import { questionMessage, singleOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 import { BagIcon, WhatsAppIcon } from "./icons";
@@ -37,7 +38,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
 
   const requireSize = () => {
     if (!size) {
-      setError("Lütfen yaş / beden seçin.");
+      setError(t(site, "txt_size_required"));
       document.getElementById("beden-secimi")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return false;
     }
@@ -52,7 +53,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
     <div className="order-panel">
       <fieldset id="beden-secimi" className="size-picker" aria-describedby={error ? "beden-hata" : undefined}>
         <legend>
-          Yaş / Beden <Link href="/beden-rehberi">Beden rehberi</Link>
+          {t(site, "txt_size_label")} <Link href="/beden-rehberi">{t(site, "txt_size_guide_link")}</Link>
         </legend>
         <div className="size-options">
           {sizes.map((s) => {
@@ -95,7 +96,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
       )}
 
       <div className="field">
-        <label htmlFor="not">Sipariş notu (isteğe bağlı)</label>
+        <label htmlFor="not">{t(site, "txt_order_note_label")}</label>
         <textarea
           id="not"
           rows={2}
@@ -125,7 +126,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
             setAdded(true);
           }}
         >
-          <BagIcon size={20} /> Sepete ekle
+          <BagIcon size={20} /> {t(site, "txt_add_to_cart")}
         </button>
       </div>
 
@@ -151,12 +152,12 @@ export function ProductOrderPanel({ product }: { product: Product }) {
           }
         }}
       >
-        <WhatsAppIcon size={22} /> WhatsApp ile sipariş ver
+        <WhatsAppIcon size={22} /> {t(site, "txt_order_whatsapp")}
       </a>
 
       {added && (
         <p className="form-success" role="status">
-          Ürün sepete eklendi. <Link href="/sepet">Sepete git</Link> ve tüm ürünleri tek mesajla gönder.
+          {t(site, "txt_added_to_cart")} <Link href="/sepet">{t(site, "txt_go_to_cart")}</Link> {t(site, "txt_added_to_cart_suffix")}
         </p>
       )}
 
@@ -166,7 +167,7 @@ export function ProductOrderPanel({ product }: { product: Product }) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Bu ürün hakkında soru sor
+        {t(site, "txt_ask_product")}
       </a>
     </div>
   );

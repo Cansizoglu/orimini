@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useId, useMemo, useRef, useState } from "react";
-import { useCatalog } from "@/lib/catalog";
+import { useCatalog, useSite } from "@/lib/catalog";
 import { buildIndex, searchProducts } from "@/lib/search";
-import { formatPrice } from "@/lib/site";
+import { formatPrice, t } from "@/lib/site";
 import { SafeImage } from "./SafeImage";
 import { SearchIcon } from "./icons";
 
@@ -16,6 +16,7 @@ export function SearchBox({ className = "" }: { className?: string }) {
   const listId = useId();
   const blurTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { products, categories, sizes } = useCatalog();
+  const site = useSite();
   const index = useMemo(() => buildIndex(products, categories, sizes), [products, categories, sizes]);
   const results = useMemo(
     () => (query.trim().length >= 2 ? searchProducts(index, query, 5) : []),
@@ -37,13 +38,13 @@ export function SearchBox({ className = "" }: { className?: string }) {
       }}
     >
       <label htmlFor={`${listId}-input`} className="sr-only">
-        Ürün ara
+        {t(site, "txt_search_title")}
       </label>
       <input
         id={`${listId}-input`}
         name="q"
         type="search"
-        placeholder="Ürün ara… (ör. salopet, elbise)"
+        placeholder={t(site, "txt_search_placeholder")}
         autoComplete="off"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
@@ -65,7 +66,7 @@ export function SearchBox({ className = "" }: { className?: string }) {
       {showList && (
         <div id={listId} className="search-results" role="listbox">
           {results.length === 0 ? (
-            <p className="search-empty">&quot;{query}&quot; için ürün bulunamadı.</p>
+            <p className="search-empty">{t(site, "txt_search_empty", { q: query })}</p>
           ) : (
             <>
               {results.map((p) => (
@@ -94,7 +95,7 @@ export function SearchBox({ className = "" }: { className?: string }) {
                 className="search-all"
                 onClick={() => setFocused(false)}
               >
-                Tüm sonuçları gör
+                {t(site, "txt_search_all")}
               </Link>
             </>
           )}

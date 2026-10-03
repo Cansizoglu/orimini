@@ -117,6 +117,7 @@ export const homeSections: HomeSectionSeed[] = [
 export type PageSeed = {
   slug: string;
   title: string;
+  short_title?: string;
   eyebrow?: string;
   lead?: string;
   content?: string;
@@ -231,6 +232,7 @@ export const pages: PageSeed[] = [
   {
     slug: "hakkimizda",
     title: "Küçükler için, sevgiyle ve özenle",
+    short_title: "Hakkımızda",
     eyebrow: "Custom-made for little ones",
     lead: "{site_adi}, {sehir}'da bebek ve çocuklar için kişiye özel kıyafetler hazırlayan butik bir atölyedir.",
     content:
@@ -368,7 +370,7 @@ export const faqs: { question: string; answer: string }[] = [
   },
 ];
 
-export const menuItems: { location: "header" | "footer"; label: string; href: string }[] = [
+export const menuItems: { location: "header" | "footer" | "mobile"; label: string; href: string }[] = [
   { location: "header", href: "/kategori/kisa-salopet-takim", label: "Kısa Salopet Takım" },
   { location: "header", href: "/kategori/uzun-salopet-takim", label: "Uzun Salopet Takım" },
   { location: "header", href: "/kategori/kiz-elbise", label: "Kız Elbise" },
@@ -383,4 +385,7 @@ export const menuItems: { location: "header" | "footer"; label: string; href: st
   { location: "footer", href: "/on-bilgilendirme-formu", label: "Ön Bilgilendirme Formu" },
   { location: "footer", href: "/kvkk-aydinlatma-metni", label: "KVKK Aydınlatma Metni" },
   { location: "footer", href: "/cerez-politikasi", label: "Çerez Politikası" },
+  { location: "mobile", href: "/favoriler", label: "Favorilerim" },
+  { location: "mobile", href: "/sikca-sorulan-sorular", label: "Nasıl Sipariş Veririm?" },
+  { location: "mobile", href: "/iletisim", label: "İletişim" },
 ];

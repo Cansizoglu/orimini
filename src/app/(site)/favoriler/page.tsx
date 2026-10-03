@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getPage, getSite } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
 import { fill } from "@/lib/site";
 import { FavoritesList } from "./FavoritesList";
 
-export const metadata: Metadata = {
-  title: "Favorilerim",
-  robots: { index: false, follow: true },
-  alternates: { canonical: "/favoriler" },
-};
+export function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("favoriler", { robots: { index: false, follow: true } });
+}
 
 export default async function FavoritesPage() {
   const [page, site] = await Promise.all([getPage("favoriler"), getSite()]);

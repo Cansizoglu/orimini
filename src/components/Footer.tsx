@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Content } from "@/lib/content";
-import { fill } from "@/lib/site";
+import { fill, t } from "@/lib/site";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
 import { ClockIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "./icons";
 
@@ -31,12 +31,12 @@ export function Footer({ content }: { content: Content }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <WhatsAppIcon size={18} /> {site.raw.footer_whatsapp_button}
+            <WhatsAppIcon size={18} /> {fill(site.raw.footer_whatsapp_button, site)}
           </a>
         </div>
 
         <div>
-          <h2 className="footer-title">Kategoriler</h2>
+          <h2 className="footer-title">{t(site, "txt_footer_categories")}</h2>
           <ul className="footer-links">
             {categories.map((c) => (
               <li key={c.slug}>
@@ -44,13 +44,13 @@ export function Footer({ content }: { content: Content }) {
               </li>
             ))}
             <li>
-              <Link href="/urunler">Tüm Ürünler</Link>
+              <Link href="/urunler">{t(site, "txt_footer_all_products")}</Link>
             </li>
           </ul>
         </div>
 
         <div>
-          <h2 className="footer-title">Kurumsal</h2>
+          <h2 className="footer-title">{t(site, "txt_footer_corporate")}</h2>
           <ul className="footer-links">
             {footerMenu.map((l) => (
               <li key={l.href + l.label}>
@@ -61,7 +61,7 @@ export function Footer({ content }: { content: Content }) {
         </div>
 
         <div>
-          <h2 className="footer-title">İletişim</h2>
+          <h2 className="footer-title">{t(site, "txt_footer_contact")}</h2>
           <ul className="footer-contact">
             <li>
               <PinIcon /> <span>{site.address}</span>

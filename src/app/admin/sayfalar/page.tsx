@@ -20,6 +20,7 @@ export default function AdminSayfalarPage() {
         fields={[
           { key: 'title', label: 'Sayfa başlığı (H1)', type: 'text', required: true },
           { key: 'slug', label: 'Slug (URL)', type: 'text', required: true, hint: 'Sistem sayfalarının slug\'ını değiştirmeyin.' },
+          { key: 'short_title', label: 'Kısa ad (sayfa yolunda görünür)', type: 'text', hint: 'Boşsa sayfa başlığı kullanılır.' },
           { key: 'eyebrow', label: 'Üst küçük yazı', type: 'text' },
           { key: 'is_active', label: 'Yayında', type: 'checkbox' },
           { key: 'lead', label: 'Giriş yazısı (başlığın altındaki büyük yazı)', type: 'textarea' },
@@ -32,7 +33,7 @@ export default function AdminSayfalarPage() {
           { key: 'seo_description', label: '🔍 Meta açıklama', type: 'textarea', section: 'SEO' },
           { key: 'sort_order', label: 'Sıra', type: 'number', section: 'SEO' },
         ]}
-        defaultValues={{ title: '', slug: '', eyebrow: '', lead: '', content: '', image_url: '', image_alt: '', button_text: '', button_link: '', seo_title: '', seo_description: '', sort_order: 0, is_active: true }}
+        defaultValues={{ title: '', short_title: '', slug: '', eyebrow: '', lead: '', content: '', image_url: '', image_alt: '', button_text: '', button_link: '', seo_title: '', seo_description: '', sort_order: 0, is_active: true }}
       />
       <div className="mt-6"><Shortcodes /></div>
     </div>

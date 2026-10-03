@@ -5,7 +5,7 @@ import { SafeImage } from "@/components/SafeImage";
 import { TrustBar } from "@/components/TrustBar";
 import { WhatsAppIcon } from "@/components/icons";
 import { getContent, type Content } from "@/lib/content";
-import { fill, splitLine } from "@/lib/site";
+import { fill, splitLine, t } from "@/lib/site";
 import type { HomeSection, Site } from "@/lib/types";
 import { resolveLink } from "@/lib/whatsapp";
 
@@ -186,7 +186,7 @@ function renderSection(s: HomeSection, content: Content, index: number) {
                   </div>
                   <div className="category-card-body">
                     <h3>{c.name}</h3>
-                    <span>İncele →</span>
+                    <span>{t(site, "txt_category_card_link")}</span>
                   </div>
                 </Link>
               ))}

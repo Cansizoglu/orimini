@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useCatalog } from "@/lib/catalog";
+import { useCatalog, useSite } from "@/lib/catalog";
+import { t } from "@/lib/site";
 import type { Product } from "@/lib/types";
 import { ProductCard } from "./ProductCard";
 
@@ -18,6 +19,7 @@ export function ProductListing({
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState<Sort>("onerilen");
   const { sizes } = useCatalog();
+  const site = useSite();
 
   const availableSizes = useMemo(
     () => sizes.filter((s) => products.some((p) => p.sizes.includes(s.id))),
@@ -39,9 +41,9 @@ export function ProductListing({
       <div className="filters" role="group" aria-label="Ürün filtreleri">
         {categories && (
           <label>
-            <span>Kategori</span>
+            <span>{t(site, "txt_filter_category")}</span>
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
-              <option value="">Tümü</option>
+              <option value="">{t(site, "txt_filter_all")}</option>
               {categories.map((c) => (
                 <option key={c.slug} value={c.slug}>
                   {c.name}
@@ -51,9 +53,9 @@ export function ProductListing({
           </label>
         )}
         <label>
-          <span>Yaş / Beden</span>
+          <span>{t(site, "txt_filter_size")}</span>
           <select value={size} onChange={(e) => setSize(e.target.value)}>
-            <option value="">Tümü</option>
+            <option value="">{t(site, "txt_filter_all")}</option>
             {availableSizes.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.label}
@@ -62,15 +64,15 @@ export function ProductListing({
           </select>
         </label>
         <label>
-          <span>Sırala</span>
+          <span>{t(site, "txt_sort")}</span>
           <select value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
-            <option value="onerilen">Önerilen</option>
-            <option value="fiyat-artan">Fiyat: Düşükten yükseğe</option>
-            <option value="fiyat-azalan">Fiyat: Yüksekten düşüğe</option>
+            <option value="onerilen">{t(site, "txt_sort_recommended")}</option>
+            <option value="fiyat-artan">{t(site, "txt_sort_price_asc")}</option>
+            <option value="fiyat-azalan">{t(site, "txt_sort_price_desc")}</option>
           </select>
         </label>
         <p className="filters-count" aria-live="polite">
-          {visible.length} ürün
+          {t(site, "txt_products_count", { n: visible.length })}
         </p>
       </div>
 
@@ -81,7 +83,7 @@ export function ProductListing({
           ))}
         </div>
       ) : (
-        <p className="empty">Bu filtrelere uygun ürün bulunamadı. Farklı bir beden seçmeyi deneyin.</p>
+        <p className="empty">{t(site, "txt_listing_empty")}</p>
       )}
     </div>
   );

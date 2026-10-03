@@ -51,6 +51,123 @@ kalkan | Nakış onayı sonrası üretim'),
   ('footer_bottom_text', '{sehir} · Siparişler WhatsApp üzerinden alınır.'),
   ('consent_active', 'true'),
   ('consent_text', 'Sitemizde yalnızca sepet ve favorilerinizi hatırlamak için tarayıcı depolaması kullanıyoruz. Kişisel verileriniz {kvkk} ve {cerez} kapsamında korunur.'),
+  ('wa_question', 'Merhaba {site_adi}, ürünleriniz hakkında bilgi almak istiyorum.'),
+  ('wa_product_question', 'Merhaba {site_adi}, "{urun}" ({kod}) hakkında bilgi almak istiyorum.'),
+  ('wa_single_order', 'Merhaba {site_adi}, bu ürünü sipariş vermek istiyorum:'),
+  ('wa_cart_order', 'Merhaba {site_adi}, aşağıdaki ürünleri sipariş vermek istiyorum:'),
+  ('wa_review', 'Merhaba {site_adi}, ürün yorumu göndermek istiyorum:'),
+  ('wa_lbl_product', 'Ürün'),
+  ('wa_lbl_code', 'Ürün kodu'),
+  ('wa_lbl_category', 'Kategori'),
+  ('wa_lbl_size', 'Yaş / Beden'),
+  ('wa_lbl_qty', 'Adet'),
+  ('wa_lbl_embroidery', 'Nakış (isim/tarih)'),
+  ('wa_lbl_note', 'Not'),
+  ('wa_lbl_price', 'Fiyat'),
+  ('wa_lbl_link', 'Link'),
+  ('wa_lbl_total', 'Toplam'),
+  ('wa_lbl_name', 'Ad Soyad'),
+  ('wa_lbl_city', 'İl / İlçe'),
+  ('wa_lbl_order_note', 'Sipariş notu'),
+  ('wa_lbl_rating', 'Puan'),
+  ('wa_lbl_comment', 'Yorum'),
+  ('txt_search_placeholder', 'Ürün ara… (ör. salopet, elbise)'),
+  ('txt_search_empty', '"{q}" için ürün bulunamadı.'),
+  ('txt_search_all', 'Tüm sonuçları gör'),
+  ('txt_breadcrumb_home', 'Anasayfa'),
+  ('txt_footer_categories', 'Kategoriler'),
+  ('txt_footer_all_products', 'Tüm Ürünler'),
+  ('txt_footer_corporate', 'Kurumsal'),
+  ('txt_footer_contact', 'İletişim'),
+  ('txt_category_card_link', 'İncele →'),
+  ('txt_sale_badge', 'İndirim'),
+  ('txt_favorite', 'Beğen'),
+  ('txt_favorited', 'Beğenildi'),
+  ('txt_consent_accept', 'Anladım'),
+  ('txt_last_updated', 'Son güncelleme'),
+  ('txt_404_title', 'Aradığınız sayfa bulunamadı'),
+  ('txt_404_text', 'Sayfa taşınmış ya da kaldırılmış olabilir. Koleksiyonumuza göz atabilirsiniz.'),
+  ('txt_404_button', 'Ürünlere git'),
+  ('txt_filter_category', 'Kategori'),
+  ('txt_filter_size', 'Yaş / Beden'),
+  ('txt_filter_all', 'Tümü'),
+  ('txt_sort', 'Sırala'),
+  ('txt_sort_recommended', 'Önerilen'),
+  ('txt_sort_price_asc', 'Fiyat: Düşükten yükseğe'),
+  ('txt_sort_price_desc', 'Fiyat: Yüksekten düşüğe'),
+  ('txt_products_count', '{n} ürün'),
+  ('txt_listing_empty', 'Bu filtrelere uygun ürün bulunamadı. Farklı bir beden seçmeyi deneyin.'),
+  ('txt_search_title', 'Ürün ara'),
+  ('txt_search_results_title', '"{q}" için sonuçlar'),
+  ('txt_search_found', '{n} ürün bulundu.'),
+  ('txt_search_none', 'Aradığınız ürünü bulamadık. Kategorilere göz atabilirsiniz:'),
+  ('txt_product_code', 'Ürün kodu'),
+  ('txt_color', 'Renk'),
+  ('txt_size', 'Beden'),
+  ('txt_no_reviews_short', 'Henüz yorum yok · İlk yorumu yazın'),
+  ('txt_reviews_suffix', 'yorum'),
+  ('txt_gallery_hint', 'Yakınlaştırmak için üzerine gelin, büyütmek için tıklayın'),
+  ('txt_size_label', 'Yaş / Beden'),
+  ('txt_size_guide_link', 'Beden rehberi'),
+  ('txt_size_required', 'Lütfen yaş / beden seçin.'),
+  ('txt_order_note_label', 'Sipariş notu (isteğe bağlı)'),
+  ('txt_add_to_cart', 'Sepete ekle'),
+  ('txt_order_whatsapp', 'WhatsApp ile sipariş ver'),
+  ('txt_added_to_cart', 'Ürün sepete eklendi.'),
+  ('txt_go_to_cart', 'Sepete git'),
+  ('txt_added_to_cart_suffix', 've tüm ürünleri tek mesajla gönder.'),
+  ('txt_ask_product', 'Bu ürün hakkında soru sor'),
+  ('txt_tab_description', 'Ürün açıklaması'),
+  ('txt_tab_set', 'Set içeriği'),
+  ('txt_tab_fabric', 'Kumaş ve bakım'),
+  ('txt_fabric', 'Kumaş'),
+  ('txt_tab_shipping', 'Kargo, teslimat ve iade'),
+  ('txt_related', 'Bunları da beğenebilirsiniz'),
+  ('txt_consent_sentence', '{on_bilgi}''nu ve {mesafeli}''ni okudum, onaylıyorum. {kvkk}''ni okudum.'),
+  ('txt_consent_error', 'Siparişe devam etmek için sözleşmeyi onaylayın.'),
+  ('txt_loading', 'Yükleniyor…'),
+  ('txt_modal_error', 'Metin yüklenemedi.'),
+  ('txt_modal_open_page', 'Sayfayı açın.'),
+  ('txt_modal_close', 'Okudum, kapat'),
+  ('txt_reviews_title', 'Ürün yorumları'),
+  ('txt_reviews_count', 'değerlendirme'),
+  ('txt_reviews_empty', 'Bu ürün için henüz yorum yok. İlk yorumu siz yazın!'),
+  ('txt_review_form_title', 'Yorum yazın'),
+  ('txt_review_rating', 'Puanınız'),
+  ('txt_review_rating_labels', 'Hiç beğenmedim | Beğenmedim | Fena değil | Beğendim | Çok beğendim'),
+  ('txt_review_name', 'Adınız'),
+  ('txt_review_city', 'Şehir (isteğe bağlı)'),
+  ('txt_review_comment', 'Yorumunuz'),
+  ('txt_review_submit', 'Yorumu gönder'),
+  ('txt_review_sending', 'Gönderiliyor…'),
+  ('txt_review_error_send', 'Yorum gönderilemedi, lütfen WhatsApp ile iletin.'),
+  ('txt_review_success', 'Teşekkürler! Yorumunuz bize ulaştı, onaylandıktan sonra burada yayınlanacak.'),
+  ('txt_review_error_rating', 'Lütfen yıldız seçerek puan verin.'),
+  ('txt_review_error_text', 'Lütfen adınızı ve yorumunuzu yazın.'),
+  ('txt_cart_empty_title', 'Sepetiniz boş'),
+  ('txt_cart_empty_text', 'Beğendiğiniz ürünleri sepete ekleyip hepsini tek mesajla sipariş verebilirsiniz.'),
+  ('txt_cart_empty_button', 'Alışverişe başla'),
+  ('txt_cart_size', 'Yaş / Beden'),
+  ('txt_cart_embroidery', 'Nakış'),
+  ('txt_cart_per_item', '/ adet'),
+  ('txt_cart_remove', 'Kaldır'),
+  ('txt_cart_total', 'Toplam'),
+  ('txt_cart_free_shipping', 'Kargo ücretsiz.'),
+  ('txt_cart_shipping_left', '{kalan} daha ekleyin, kargo ücretsiz olsun.'),
+  ('txt_cart_name', 'Ad Soyad'),
+  ('txt_cart_city', 'İl / İlçe'),
+  ('txt_cart_city_placeholder', 'Örn: Adana / Çukurova'),
+  ('txt_cart_note', 'Sipariş notu'),
+  ('txt_fav_empty_title', 'Henüz favori ürününüz yok'),
+  ('txt_fav_empty_text', 'Ürünlerin üzerindeki kalbe dokunarak beğendiklerinizi buraya ekleyebilirsiniz.'),
+  ('txt_fav_empty_button', 'Ürünlere göz at'),
+  ('txt_contact_whatsapp', 'WhatsApp'),
+  ('txt_contact_phone', 'Telefon'),
+  ('txt_contact_email', 'E-posta'),
+  ('txt_contact_hours', 'Çalışma saatleri'),
+  ('txt_size_col', 'Yaş / Beden'),
+  ('txt_height_col', 'Boy'),
+  ('txt_weight_col', 'Kilo'),
   ('legal_title', 'Orimini'),
   ('legal_address', 'Adana, Türkiye'),
   ('legal_tax_info', ''),
@@ -135,14 +252,14 @@ Onay ve kargo | Ödeme ve teslim bilgilerini netleştirip hazırlamaya başları
 on conflict (section_key) do nothing;
 
 -- pages
-insert into pages (slug, title, seo_title, seo_description, is_system, is_active, sort_order, lead, eyebrow, content, image_url, image_alt, button_text, button_link) values
-  ('anasayfa', 'Anasayfa', '{site_adi} | Kişiye Özel Nakışlı Bebek ve Çocuk Kıyafetleri', '', true, true, 1, null, null, null, null, null, null, null),
-  ('urunler', 'Tüm Ürünler', 'Tüm Ürünler - Kişiye Özel Bebek ve Çocuk Kıyafetleri', '{site_adi}''nin tüm koleksiyonu: isim nakışlı kısa ve uzun salopet takımlar, kız çocuk elbiseleri ve yenidoğan setleri. Yaşa ve bedene göre filtreleyin.', true, true, 2, '0-3 aydan 10 yaşa kadar, kişiye özel nakışlı takımlar ve elbiseler. Yaş / beden seçerek size uygun modelleri görün.', null, null, null, null, null, null),
-  ('hakkimizda', 'Küçükler için, sevgiyle ve özenle', 'Hakkımızda', '{site_adi}, {sehir}''da kişiye özel nakışlı bebek ve çocuk kıyafetleri hazırlayan bir butik atölyedir.', true, true, 3, '{site_adi}, {sehir}''da bebek ve çocuklar için kişiye özel kıyafetler hazırlayan butik bir atölyedir.', 'Custom-made for little ones', '<p>Her takımı tek tek kesiyor, dikiyor ve bebeğinizin adıyla, doğum tarihiyle ya da ilk yaşıyla nakışlıyoruz. Salopet takımlardan kız elbiselerine, hastane çıkışı setlerinden doğum günü kıyafetlerine kadar her parçada yumuşak, cilt dostu kumaşlar ve pastel tonlar kullanıyoruz.</p>
+insert into pages (slug, title, seo_title, seo_description, is_system, is_active, sort_order, lead, short_title, eyebrow, content, image_url, image_alt, button_text, button_link) values
+  ('anasayfa', 'Anasayfa', '{site_adi} | Kişiye Özel Nakışlı Bebek ve Çocuk Kıyafetleri', '', true, true, 1, null, null, null, null, null, null, null, null),
+  ('urunler', 'Tüm Ürünler', 'Tüm Ürünler - Kişiye Özel Bebek ve Çocuk Kıyafetleri', '{site_adi}''nin tüm koleksiyonu: isim nakışlı kısa ve uzun salopet takımlar, kız çocuk elbiseleri ve yenidoğan setleri. Yaşa ve bedene göre filtreleyin.', true, true, 2, '0-3 aydan 10 yaşa kadar, kişiye özel nakışlı takımlar ve elbiseler. Yaş / beden seçerek size uygun modelleri görün.', null, null, null, null, null, null, null),
+  ('hakkimizda', 'Küçükler için, sevgiyle ve özenle', 'Hakkımızda', '{site_adi}, {sehir}''da kişiye özel nakışlı bebek ve çocuk kıyafetleri hazırlayan bir butik atölyedir.', true, true, 3, '{site_adi}, {sehir}''da bebek ve çocuklar için kişiye özel kıyafetler hazırlayan butik bir atölyedir.', 'Hakkımızda', 'Custom-made for little ones', '<p>Her takımı tek tek kesiyor, dikiyor ve bebeğinizin adıyla, doğum tarihiyle ya da ilk yaşıyla nakışlıyoruz. Salopet takımlardan kız elbiselerine, hastane çıkışı setlerinden doğum günü kıyafetlerine kadar her parçada yumuşak, cilt dostu kumaşlar ve pastel tonlar kullanıyoruz.</p>
 <p>Amacımız, çocuğunuzun özel gününü fotoğraflarda ve anılarda bir ömür yaşatacak kıyafetler hazırlamak. Beden, renk ya da tema konusunda aklınızdakini bize yazmanız yeterli.</p>', '/images/urunler/bej-aslan-salopet.webp', 'Orimini atölyesinde hazırlanan isim nakışlı salopet takım', 'Bize yazın', 'whatsapp'),
-  ('iletisim', 'İletişim', 'İletişim', '{site_adi} iletişim bilgileri: WhatsApp ve telefon {telefon}, {sehir}. Sipariş ve özel tasarım talepleriniz için bize yazın.', true, true, 4, 'Siparişleriniz, özel tasarım talepleriniz ve beden sorularınız için bize WhatsApp''tan ulaşabilirsiniz. Atölyemiz {sehir}''dadır, tüm Türkiye''ye kargo gönderiyoruz.', null, '<h2>Konum</h2>
+  ('iletisim', 'İletişim', 'İletişim', '{site_adi} iletişim bilgileri: WhatsApp ve telefon {telefon}, {sehir}. Sipariş ve özel tasarım talepleriniz için bize yazın.', true, true, 4, 'Siparişleriniz, özel tasarım talepleriniz ve beden sorularınız için bize WhatsApp''tan ulaşabilirsiniz. Atölyemiz {sehir}''dadır, tüm Türkiye''ye kargo gönderiyoruz.', null, null, '<h2>Konum</h2>
 <p>{adres}. {sehir} içinden siparişlerde elden teslim seçeneği için WhatsApp üzerinden bilgi alabilirsiniz.</p>', null, null, null, null),
-  ('kargo-ve-iade', 'Kargo ve İade', 'Kargo ve İade Koşulları', '{site_adi} kargo, teslimat, değişim ve iade koşulları. {kargo_limit} üzeri ücretsiz kargo.', true, true, 5, null, null, '<h2>Hazırlık süresi</h2>
+  ('kargo-ve-iade', 'Kargo ve İade', 'Kargo ve İade Koşulları', '{site_adi} kargo, teslimat, değişim ve iade koşulları. {kargo_limit} üzeri ücretsiz kargo.', true, true, 5, null, null, null, '<h2>Hazırlık süresi</h2>
 <p>Ürünlerimiz sipariş üzerine, kişiye özel olarak hazırlanır. Nakış yazımını WhatsApp''tan onayladıktan sonra siparişiniz genellikle 3-7 iş günü içinde kargoya verilir. Yoğun dönemlerde (bayram, yılbaşı) bu süre uzayabilir; sipariş sırasında size net tarih bildiririz.</p>
 <h2>Kargo</h2>
 <ul>
@@ -160,16 +277,16 @@ insert into pages (slug, title, seo_title, seo_description, is_system, is_active
 <li>Üretim hatası olan ürünlerde kargo ücreti tarafımıza aittir; ürün yenilenir ya da ücret iade edilir.</li>
 </ul>
 <p>Değişim ve iade talepleriniz için WhatsApp hattımızdan ({telefon}) bize ulaşın.</p>', null, null, null, null),
-  ('beden-rehberi', 'Beden Rehberi', 'Beden Rehberi - Bebek ve Çocuk Yaş Beden Tablosu', '0-3 aydan 10 yaşa kadar bebek ve çocuk beden tablosu: boy ve kilo aralıklarına göre doğru yaş / beden seçimi.', true, true, 6, 'Doğru bedeni seçmek için çocuğunuzun yaşından çok boy ve kilosuna bakmanızı öneririz. İki beden arasında kaldıysanız büyük olanı seçin.', null, '<h2>Nasıl ölçülür?</h2>
+  ('beden-rehberi', 'Beden Rehberi', 'Beden Rehberi - Bebek ve Çocuk Yaş Beden Tablosu', '0-3 aydan 10 yaşa kadar bebek ve çocuk beden tablosu: boy ve kilo aralıklarına göre doğru yaş / beden seçimi.', true, true, 6, 'Doğru bedeni seçmek için çocuğunuzun yaşından çok boy ve kilosuna bakmanızı öneririz. İki beden arasında kaldıysanız büyük olanı seçin.', null, null, '<h2>Nasıl ölçülür?</h2>
 <ul>
 <li><strong>Boy:</strong> Çocuğunuzu çıplak ayakla duvara yaslayın, başının üstünden topuğuna kadar ölçün.</li>
 <li><strong>Göğüs:</strong> Kolların altından, göğsün en geniş yerinden mezurayı sıkmadan geçirin.</li>
 <li><strong>Özel dikim:</strong> Ölçüleriniz tabloya uymuyorsa WhatsApp''tan yazın, ölçüye göre dikelim.</li>
 </ul>', null, null, null, null),
-  ('sikca-sorulan-sorular', 'Sıkça Sorulan Sorular', 'Sıkça Sorulan Sorular - Nasıl Sipariş Verilir?', '{site_adi}''den WhatsApp ile nasıl sipariş verilir, nakış, beden, kargo ve ödeme hakkında sıkça sorulan sorular.', true, true, 7, 'Aradığınız cevabı bulamazsanız WhatsApp''tan ({telefon}) bize yazın.', null, null, null, null, null, null),
-  ('sepet', 'Sepetim', null, null, true, true, 8, 'Seçtiğiniz ürünleri tek bir WhatsApp mesajıyla bize gönderin, siparişinizi hemen onaylayalım.', null, null, null, null, null, null),
-  ('favoriler', 'Favorilerim', null, null, true, true, 9, 'Beğendiğiniz ürünler burada saklanır.', null, null, null, null, null, null),
-  ('mesafeli-satis-sozlesmesi', 'Mesafeli Satış Sözleşmesi', null, '{site_adi} mesafeli satış sözleşmesi: sipariş, ödeme, teslimat, cayma hakkı ve iade koşulları.', true, true, 10, null, null, '<h2>1. Taraflar</h2>
+  ('sikca-sorulan-sorular', 'Sıkça Sorulan Sorular', 'Sıkça Sorulan Sorular - Nasıl Sipariş Verilir?', '{site_adi}''den WhatsApp ile nasıl sipariş verilir, nakış, beden, kargo ve ödeme hakkında sıkça sorulan sorular.', true, true, 7, 'Aradığınız cevabı bulamazsanız WhatsApp''tan ({telefon}) bize yazın.', null, null, null, null, null, null, null),
+  ('sepet', 'Sepetim', null, null, true, true, 8, 'Seçtiğiniz ürünleri tek bir WhatsApp mesajıyla bize gönderin, siparişinizi hemen onaylayalım.', null, null, null, null, null, null, null),
+  ('favoriler', 'Favorilerim', null, null, true, true, 9, 'Beğendiğiniz ürünler burada saklanır.', null, null, null, null, null, null, null),
+  ('mesafeli-satis-sozlesmesi', 'Mesafeli Satış Sözleşmesi', null, '{site_adi} mesafeli satış sözleşmesi: sipariş, ödeme, teslimat, cayma hakkı ve iade koşulları.', true, true, 10, null, null, null, '<h2>1. Taraflar</h2>
 <p><strong>SATICI</strong></p>
 {satici_bilgileri}
 <p><strong>ALICI:</strong> Siparişi WhatsApp üzerinden veren ve ad, soyad, adres, telefon bilgilerini paylaşan kişidir. Alıcı bilgileri sipariş onayı sırasında alınır.</p>
@@ -188,7 +305,7 @@ insert into pages (slug, title, seo_title, seo_description, is_system, is_active
 <p>Bu sözleşmeden doğan uyuşmazlıklarda, Ticaret Bakanlığı''nca her yıl ilan edilen parasal sınırlar dahilinde alıcının veya satıcının yerleşim yerindeki Tüketici Hakem Heyetleri, bu sınırları aşan durumlarda Tüketici Mahkemeleri yetkilidir.</p>
 <h2>8. Yürürlük</h2>
 <p>Alıcı, siparişi göndermeden önce bu sözleşmeyi ve <a href="/on-bilgilendirme-formu">Ön Bilgilendirme Formu</a>''nu okuduğunu ve kabul ettiğini onaylar. Sözleşme, satıcının siparişi WhatsApp üzerinden yazılı olarak onaylaması ile yürürlüğe girer.</p>', null, null, null, null),
-  ('on-bilgilendirme-formu', 'Ön Bilgilendirme Formu', null, '{site_adi} ön bilgilendirme formu: satıcı bilgileri, ödeme, teslimat ve cayma hakkı.', true, true, 11, null, null, '<h2>Satıcı bilgileri</h2>
+  ('on-bilgilendirme-formu', 'Ön Bilgilendirme Formu', null, '{site_adi} ön bilgilendirme formu: satıcı bilgileri, ödeme, teslimat ve cayma hakkı.', true, true, 11, null, null, null, '<h2>Satıcı bilgileri</h2>
 {satici_bilgileri}
 <h2>Ürünün temel nitelikleri ve fiyatı</h2>
 <p>Ürünün adı, kodu, rengi, kumaşı, set içeriği ve vergiler dahil fiyatı ürün sayfasında yer alır. Seçilen yaş / beden, adet ve kişiye özel nakış bilgisi sipariş mesajında belirtilir.</p>
@@ -198,7 +315,7 @@ insert into pages (slug, title, seo_title, seo_description, is_system, is_active
 <p>Nakışsız ürünlerde teslimden itibaren 14 gün içinde cayma hakkı vardır. Kişiye özel nakış işlenen ürünlerde, Mesafeli Sözleşmeler Yönetmeliği md. 15/1-ç uyarınca cayma hakkı bulunmaz. Ayrıntılar <a href="/mesafeli-satis-sozlesmesi">Mesafeli Satış Sözleşmesi</a>''nde yer alır.</p>
 <h2>Şikâyet ve başvuru</h2>
 <p>Talep ve şikâyetlerinizi {telefon} numaralı WhatsApp hattına iletebilirsiniz. Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri''ne başvuru hakkınız saklıdır.</p>', null, null, null, null),
-  ('kvkk-aydinlatma-metni', 'KVKK Aydınlatma Metni', null, '{site_adi} kişisel verilerin korunması aydınlatma metni.', true, true, 12, null, null, '<p>{satici_unvan} ("Veri Sorumlusu") olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında kişisel verilerinizi aşağıda açıklanan şekilde işliyoruz.</p>
+  ('kvkk-aydinlatma-metni', 'KVKK Aydınlatma Metni', null, '{site_adi} kişisel verilerin korunması aydınlatma metni.', true, true, 12, null, null, null, '<p>{satici_unvan} ("Veri Sorumlusu") olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında kişisel verilerinizi aşağıda açıklanan şekilde işliyoruz.</p>
 <h2>İşlenen kişisel veriler</h2>
 <ul>
 <li>Kimlik ve iletişim: ad, soyad, telefon numarası, teslimat adresi, e-posta</li>
@@ -220,7 +337,7 @@ insert into pages (slug, title, seo_title, seo_description, is_system, is_active
 <h2>Haklarınız</h2>
 <p>KVKK md. 11 uyarınca; verilerinizin işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltilmesini veya silinmesini isteme, aktarıldığı üçüncü kişileri öğrenme, itiraz etme ve zararın giderilmesini talep etme haklarına sahipsiniz. Başvurularınızı {kvkk_iletisim} üzerinden iletebilirsiniz; talepler en geç 30 gün içinde yanıtlanır.</p>
 <p><strong>Veri sorumlusu:</strong> {satici_unvan}, {satici_adres}</p>', null, null, null, null),
-  ('cerez-politikasi', 'Çerez Politikası', null, '{site_adi} çerez ve tarayıcı depolama politikası.', true, true, 13, null, null, '<p>{site_url} yalnızca sitenin çalışması için gerekli olan tarayıcı depolamasını kullanır. Reklam veya takip çerezi kullanılmaz.</p>
+  ('cerez-politikasi', 'Çerez Politikası', null, '{site_adi} çerez ve tarayıcı depolama politikası.', true, true, 13, null, null, null, '<p>{site_url} yalnızca sitenin çalışması için gerekli olan tarayıcı depolamasını kullanır. Reklam veya takip çerezi kullanılmaz.</p>
 <h2>Kullanılan depolama alanları</h2>
 <ul>
 <li><strong>orimini-sepet:</strong> Sepete eklediğiniz ürünleri hatırlar.</li>
@@ -260,6 +377,9 @@ select * from (values
   ('footer', '/mesafeli-satis-sozlesmesi', 'Mesafeli Satış Sözleşmesi', true, 11),
   ('footer', '/on-bilgilendirme-formu', 'Ön Bilgilendirme Formu', true, 12),
   ('footer', '/kvkk-aydinlatma-metni', 'KVKK Aydınlatma Metni', true, 13),
-  ('footer', '/cerez-politikasi', 'Çerez Politikası', true, 14)
+  ('footer', '/cerez-politikasi', 'Çerez Politikası', true, 14),
+  ('mobile', '/favoriler', 'Favorilerim', true, 15),
+  ('mobile', '/sikca-sorulan-sorular', 'Nasıl Sipariş Veririm?', true, 16),
+  ('mobile', '/iletisim', 'İletişim', true, 17)
 ) as v(location, href, label, is_active, sort_order)
 where not exists (select 1 from menu_items);

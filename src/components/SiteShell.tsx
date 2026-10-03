@@ -63,7 +63,7 @@ export async function SiteShell({ children }: Readonly<{ children: React.ReactNo
       >
         <CartProvider>
           <FavoritesProvider>
-            <Header menu={content.headerMenu} />
+            <Header menu={content.headerMenu} mobileMenu={content.mobileMenu} />
             <main id="icerik">{children}</main>
             <Footer content={content} />
             <WhatsAppFloat />

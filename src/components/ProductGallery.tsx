@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useSite } from "@/lib/catalog";
+import { t } from "@/lib/site";
 import type { ProductImage } from "@/lib/types";
 import { SafeImage } from "./SafeImage";
 import { CloseIcon } from "./icons";
@@ -35,6 +37,7 @@ function useSwipe(onPrev: () => void, onNext: () => void) {
 }
 
 export function ProductGallery({ images, name }: { images: ProductImage[]; name: string }) {
+  const site = useSite();
   const [active, setActive] = useState(0);
   const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
   const [lightbox, setLightbox] = useState(false);
@@ -111,7 +114,7 @@ export function ProductGallery({ images, name }: { images: ProductImage[]; name:
             />
           </div>
           <span className="gallery-hint" aria-hidden>
-            Yakınlaştırmak için üzerine gelin, büyütmek için tıklayın
+            {t(site, "txt_gallery_hint")}
           </span>
         </div>
         {many && (

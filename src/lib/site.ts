@@ -120,6 +120,13 @@ export function fill(text: string | null | undefined, site: Site, { html = false
   });
 }
 
+// Site metni: ayardan okur, kısa kodları ve {n}, {q} gibi değişkenleri doldurur.
+export function t(site: Site, key: string, vars: Record<string, string | number> = {}) {
+  let text = fill(site.raw[key] ?? settingDefaults[key] ?? "", site);
+  for (const [k, v] of Object.entries(vars)) text = text.split(`{${k}}`).join(String(v));
+  return text;
+}
+
 export function stripHtml(html: string) {
   return html
     .replace(/<[^>]+>/g, " ")

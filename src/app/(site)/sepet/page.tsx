@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getPage, getSite } from "@/lib/content";
+import { pageMetadata } from "@/lib/seo";
 import { fill } from "@/lib/site";
 import { CartView } from "./CartView";
 
-export const metadata: Metadata = {
-  title: "Sepetim",
-  robots: { index: false, follow: true },
-  alternates: { canonical: "/sepet" },
-};
+export function generateMetadata(): Promise<Metadata> {
+  return pageMetadata("sepet", { robots: { index: false, follow: true } });
+}
 
 export default async function CartPage() {
   const [page, site] = await Promise.all([getPage("sepet"), getSite()]);

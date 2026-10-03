@@ -80,6 +80,7 @@ export type Banner = {
 export type Page = {
   slug: string;
   title: string;
+  shortTitle: string;
   eyebrow: string;
   lead: string;
   content: string;

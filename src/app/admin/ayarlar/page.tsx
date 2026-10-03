@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Save, CheckCircle } from 'lucide-react'
+import { Save, CheckCircle, Search } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import ImageUpload from '@/components/admin/ImageUpload'
 import Shortcodes from '@/components/admin/Shortcodes'
@@ -14,6 +14,7 @@ export default function AdminAyarlarPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     createClient().from('site_settings').select('key, value').then(({ data }) => {
@@ -52,6 +53,15 @@ export default function AdminAyarlarPage() {
     }
   }
 
+  const q = query.trim().toLocaleLowerCase('tr-TR')
+  const match = (f: SettingField) =>
+    [f.label, f.hint, f.key, settings[f.key]].some((v) => (v ?? '').toLocaleLowerCase('tr-TR').includes(q))
+  const groups = q
+    ? settingGroups
+        .map((g) => ({ ...g, fields: g.title.toLocaleLowerCase('tr-TR').includes(q) ? g.fields : g.fields.filter(match) }))
+        .filter((g) => g.fields.length > 0)
+    : settingGroups
+
   if (loading) return <p className="text-gray-400 p-4">Yükleniyor...</p>
 
   return (
@@ -64,9 +74,21 @@ export default function AdminAyarlarPage() {
         </div>
       </div>
 
-      <Shortcodes />
+      <div className="admin-card mb-4 flex items-center gap-2">
+        <Search size={18} className="text-gray-400" />
+        <input
+          className="admin-input"
+          placeholder="Ayar ara: sitede gördüğünüz yazıyı ya da ayar adını yazın (ör. Sepete ekle, logo, kargo)"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      </div>
 
-      {settingGroups.map((g) => (
+      {!q && <Shortcodes />}
+
+      {groups.length === 0 && <p className="text-gray-400 p-4">&quot;{query}&quot; ile eşleşen ayar yok.</p>}
+
+      {groups.map((g) => (
         <div key={g.title} className="admin-card mb-4">
           <h2 className="font-bold text-base text-slate-700 mb-1">{g.title}</h2>
           {g.description && <p className="text-xs text-gray-500 mb-3">{g.description}</p>}

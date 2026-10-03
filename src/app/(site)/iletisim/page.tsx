@@ -4,7 +4,7 @@ import { RichText } from "@/components/RichText";
 import { ClockIcon, PhoneIcon, WhatsAppIcon } from "@/components/icons";
 import { getContent } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { fill } from "@/lib/site";
+import { fill, t } from "@/lib/site";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
 
 export function generateMetadata(): Promise<Metadata> {
@@ -22,24 +22,24 @@ export default async function ContactPage() {
       <div className="contact-cards">
         <a href={whatsappUrl(site, questionMessage(site))} target="_blank" rel="noopener noreferrer">
           <WhatsAppIcon size={26} />
-          <strong>WhatsApp</strong>
+          <strong>{t(site, "txt_contact_whatsapp")}</strong>
           <span>{site.phoneDisplay}</span>
         </a>
         <a href={`tel:${site.phoneE164}`}>
           <PhoneIcon size={26} />
-          <strong>Telefon</strong>
+          <strong>{t(site, "txt_contact_phone")}</strong>
           <span>{site.phoneDisplay}</span>
         </a>
         {site.email ? (
           <a href={`mailto:${site.email}`}>
             <span aria-hidden="true" style={{ fontSize: 24 }}>✉</span>
-            <strong>E-posta</strong>
+            <strong>{t(site, "txt_contact_email")}</strong>
             <span>{site.email}</span>
           </a>
         ) : null}
         <div>
           <ClockIcon size={26} />
-          <strong>Çalışma saatleri</strong>
+          <strong>{t(site, "txt_contact_hours")}</strong>
           <span>{site.workingHours}</span>
         </div>
       </div>

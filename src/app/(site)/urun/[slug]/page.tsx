@@ -12,7 +12,7 @@ import { Stars } from "@/components/Stars";
 import { RichText } from "@/components/RichText";
 import { iconFor } from "@/components/icons";
 import { getContent, ratingFor, relatedProducts, reviewsFor } from "@/lib/content";
-import { absoluteUrl, fill, findCategory, formatPrice, sizeRange, splitLine, stripHtml } from "@/lib/site";
+import { absoluteUrl, fill, findCategory, formatPrice, sizeRange, splitLine, stripHtml, t } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -124,17 +124,19 @@ export default async function ProductPage({ params }: Props) {
           <h1>{product.name}</h1>
           <a href="#yorumlar" className="rating-link">
             <Stars value={rating.average} size={16} />
-            <span>{rating.count > 0 ? `${rating.average.toLocaleString("tr-TR")} · ${rating.count} yorum` : "Henüz yorum yok · İlk yorumu yazın"}</span>
+            <span>{rating.count > 0
+                ? `${rating.average.toLocaleString("tr-TR")} · ${rating.count} ${t(site, "txt_reviews_suffix")}`
+                : t(site, "txt_no_reviews_short")}</span>
           </a>
           <div className="product-meta">
             <span>
-              Ürün kodu: <strong>{product.code}</strong>
+              {t(site, "txt_product_code")}: <strong>{product.code}</strong>
             </span>
             <span>
-              Renk: <strong>{product.color}</strong>
+              {t(site, "txt_color")}: <strong>{product.color}</strong>
             </span>
             <span>
-              Beden: <strong>{sizeRange(sizes, product)}</strong>
+              {t(site, "txt_size")}: <strong>{sizeRange(sizes, product)}</strong>
             </span>
           </div>
           <p className="price product-price">
@@ -164,13 +166,13 @@ export default async function ProductPage({ params }: Props) {
           <div className="details">
             {product.description && (
               <details open>
-                <summary>Ürün açıklaması</summary>
+                <summary>{t(site, "txt_tab_description")}</summary>
                 <RichText html={product.description} site={site} className="details-body" />
               </details>
             )}
             {product.setContents.length > 0 && (
               <details>
-                <summary>Set içeriği</summary>
+                <summary>{t(site, "txt_tab_set")}</summary>
                 <div className="details-body">
                   <ul>
                     {product.setContents.map((c) => (
@@ -182,11 +184,11 @@ export default async function ProductPage({ params }: Props) {
             )}
             {(product.fabric || product.care.length > 0) && (
               <details>
-                <summary>Kumaş ve bakım</summary>
+                <summary>{t(site, "txt_tab_fabric")}</summary>
                 <div className="details-body">
                   {product.fabric && (
                     <p>
-                      <strong>Kumaş:</strong> {product.fabric}
+                      <strong>{t(site, "txt_fabric")}:</strong> {product.fabric}
                     </p>
                   )}
                   {product.care.length > 0 && (
@@ -201,7 +203,7 @@ export default async function ProductPage({ params }: Props) {
             )}
             {site.raw.product_shipping_text && (
               <details>
-                <summary>Kargo, teslimat ve iade</summary>
+                <summary>{t(site, "txt_tab_shipping")}</summary>
                 <RichText html={site.raw.product_shipping_text} site={site} className="details-body" />
               </details>
             )}
@@ -220,7 +222,7 @@ export default async function ProductPage({ params }: Props) {
       {related.length > 0 && (
         <section className="section" aria-labelledby="benzer-urunler">
           <div className="section-head">
-            <h2 id="benzer-urunler">Bunları da beğenebilirsiniz</h2>
+            <h2 id="benzer-urunler">{t(site, "txt_related")}</h2>
           </div>
           <div className="product-grid">
             {related.map((p) => (

@@ -31,8 +31,19 @@ export default function AdminMenulerPage() {
       />
       <AdminCrudPage
         table="menu_items"
+        title="Mobil Menü Ek Linkleri"
+        description="Telefonda menü açılınca ana menünün altında görünen ek linkler."
+        newLabel="Link Ekle"
+        nameKey="label"
+        filter={{ key: 'location', value: 'mobile' }}
+        fields={fields}
+        columns={columns}
+        defaultValues={defaults}
+      />
+      <AdminCrudPage
+        table="menu_items"
         title="Footer - Kurumsal Linkler"
-        description="Footer'daki Kurumsal sütunu. Kategoriler sütunu otomatik olarak kategorilerden gelir."
+        description="Footer'daki Kurumsal sütunu. Kategoriler sütunu otomatik olarak kategorilerden gelir; sütun başlıkları Site Ayarları > Site metinleri bölümündedir."
         newLabel="Link Ekle"
         nameKey="label"
         filter={{ key: 'location', value: 'footer' }}

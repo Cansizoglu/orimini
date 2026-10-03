@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { RichText } from "@/components/RichText";
 import { getContent } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { fill } from "@/lib/site";
+import { fill, t } from "@/lib/site";
 
 export function generateMetadata(): Promise<Metadata> {
   return pageMetadata("beden-rehberi");
@@ -21,9 +21,9 @@ export default async function SizeGuidePage() {
         <table>
           <thead>
             <tr>
-              <th scope="col">Yaş / Beden</th>
-              <th scope="col">Boy</th>
-              <th scope="col">Kilo</th>
+              <th scope="col">{t(site, "txt_size_col")}</th>
+              <th scope="col">{t(site, "txt_height_col")}</th>
+              <th scope="col">{t(site, "txt_weight_col")}</th>
             </tr>
           </thead>
           <tbody>

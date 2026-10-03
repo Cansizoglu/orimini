@@ -7,13 +7,13 @@ import { useState } from "react";
 import { useCart } from "@/lib/cart";
 import { useSite } from "@/lib/catalog";
 import { useFavorites } from "@/lib/favorites";
-import { isOn } from "@/lib/site";
+import { fill, isOn } from "@/lib/site";
 import type { MenuLink } from "@/lib/types";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
 import { SearchBox } from "./SearchBox";
 import { BagIcon, CloseIcon, HeartIcon, MenuIcon, WhatsAppIcon } from "./icons";
 
-export function Header({ menu }: { menu: MenuLink[] }) {
+export function Header({ menu, mobileMenu }: { menu: MenuLink[]; mobileMenu: MenuLink[] }) {
   const site = useSite();
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -26,7 +26,7 @@ export function Header({ menu }: { menu: MenuLink[] }) {
       {isOn(site, "announcement_active") && (
         <div className="announcement">
           <p>
-            {site.raw.announcement_text}
+            {fill(site.raw.announcement_text, site)}
             {isOn(site, "announcement_show_whatsapp") && (
               <>
                 {site.raw.announcement_text ? " · " : ""}
@@ -93,21 +93,13 @@ export function Header({ menu }: { menu: MenuLink[] }) {
               </Link>
             </li>
           ))}
-          <li className="main-nav-extra">
-            <Link href="/favoriler" onClick={close}>
-              Favorilerim
-            </Link>
-          </li>
-          <li className="main-nav-extra">
-            <Link href="/sikca-sorulan-sorular" onClick={close}>
-              Nasıl Sipariş Veririm?
-            </Link>
-          </li>
-          <li className="main-nav-extra">
-            <Link href="/iletisim" onClick={close}>
-              İletişim
-            </Link>
-          </li>
+          {mobileMenu.map((l) => (
+            <li key={`m-${l.href}-${l.label}`} className="main-nav-extra">
+              <Link href={l.href} onClick={close}>
+                {l.label}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>

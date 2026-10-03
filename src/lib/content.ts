@@ -69,7 +69,8 @@ const loadAll = unstable_cache(
     const results = await Promise.all(tables.map(fetchTable));
     return Object.fromEntries(tables.map((t, i) => [t, results[i]])) as Record<Table, Row[]>;
   },
-  ["orimini-content-v1"],
+  ["orimini-content-v2"],
+  // Veri yapısı değiştiğinde anahtar sürümünü artırın, eski önbellek kullanılmasın.
   { tags: [CONTENT_TAG], revalidate: 3600 },
 );
 
@@ -173,6 +174,7 @@ export const getContent = cache(async () => {
   const pages: Page[] = raw.pages.filter(active).map((r) => ({
     slug: str(r.slug),
     title: str(r.title),
+    shortTitle: str(r.short_title) || str(r.title),
     eyebrow: str(r.eyebrow),
     lead: str(r.lead),
     content: str(r.content),
@@ -214,6 +216,7 @@ export const getContent = cache(async () => {
     faqs,
     banners,
     headerMenu: menu("header"),
+    mobileMenu: menu("mobile"),
     footerMenu: menu("footer"),
   };
 });

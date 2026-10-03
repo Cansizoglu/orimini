@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useCatalog } from "@/lib/catalog";
+import { t } from "@/lib/site";
 import { CloseIcon } from "./icons";
 
 export type LegalSlug = "mesafeli-satis-sozlesmesi" | "on-bilgilendirme-formu" | "kvkk-aydinlatma-metni" | "cerez-politikasi";
@@ -10,7 +11,7 @@ const cache = new Map<string, string>();
 
 export function LegalModal({ slug, onClose }: { slug: LegalSlug | null; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
-  const { legalTitles } = useCatalog();
+  const { legalTitles, site } = useCatalog();
   const [html, setHtml] = useState<string | null>(null);
 
   useEffect(() => {
@@ -34,12 +35,12 @@ export function LegalModal({ slug, onClose }: { slug: LegalSlug | null; onClose:
         if (!cancelled) setHtml(data.html);
       })
       .catch(() => {
-        if (!cancelled) setHtml(`<p>Metin yüklenemedi. <a href="/${slug}" target="_blank">Sayfayı açın</a>.</p>`);
+        if (!cancelled) setHtml(`<p>${t(site, "txt_modal_error")} <a href="/${slug}" target="_blank">${t(site, "txt_modal_open_page")}</a></p>`);
       });
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, site]);
 
   return (
     <dialog
@@ -60,11 +61,11 @@ export function LegalModal({ slug, onClose }: { slug: LegalSlug | null; onClose:
             </button>
           </div>
           <div className="modal-body prose legal" aria-busy={html === null}>
-            {html === null ? <p>Yükleniyor…</p> : <div dangerouslySetInnerHTML={{ __html: html }} />}
+            {html === null ? <p>{t(site, "txt_loading")}</p> : <div dangerouslySetInnerHTML={{ __html: html }} />}
           </div>
           <div className="modal-foot">
             <button type="button" className="btn btn-primary" onClick={onClose}>
-              Okudum, kapat
+              {t(site, "txt_modal_close")}
             </button>
           </div>
         </div>

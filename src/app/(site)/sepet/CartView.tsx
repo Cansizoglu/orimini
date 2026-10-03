@@ -7,7 +7,7 @@ import { OrderConsent } from "@/components/OrderConsent";
 import { SafeImage } from "@/components/SafeImage";
 import { useCart } from "@/lib/cart";
 import { useCatalog } from "@/lib/catalog";
-import { fill, formatPrice, sizeLabel } from "@/lib/site";
+import { fill, formatPrice, sizeLabel, t } from "@/lib/site";
 import { cartOrderMessage, whatsappUrl } from "@/lib/whatsapp";
 
 export function CartView() {
@@ -24,10 +24,10 @@ export function CartView() {
   if (lines.length === 0) {
     return (
       <div className="cta-box" style={{ marginBottom: 60 }}>
-        <h2>Sepetiniz boş</h2>
-        <p>Beğendiğiniz ürünleri sepete ekleyip hepsini tek mesajla sipariş verebilirsiniz.</p>
+        <h2>{t(site, "txt_cart_empty_title")}</h2>
+        <p>{t(site, "txt_cart_empty_text")}</p>
         <Link href="/urunler" className="btn btn-primary">
-          Alışverişe başla
+          {t(site, "txt_cart_empty_button")}
         </Link>
       </div>
     );
@@ -52,9 +52,15 @@ export function CartView() {
               <h2>
                 <Link href={`/urun/${l.product.slug}?beden=${l.size}`}>{l.product.name}</Link>
               </h2>
-              <p>Yaş / Beden: {sizeLabel(sizes, l.size)}</p>
-              {l.personalization && <p>Nakış: {l.personalization}</p>}
-              <p>{formatPrice(l.product.price)} / adet</p>
+              <p>
+                {t(site, "txt_cart_size")}: {sizeLabel(sizes, l.size)}
+              </p>
+              {l.personalization && <p>
+                  {t(site, "txt_cart_embroidery")}: {l.personalization}
+                </p>}
+              <p>
+                {formatPrice(l.product.price)} {t(site, "txt_cart_per_item")}
+              </p>
             </div>
             <div className="cart-item-side">
               <div className="qty" aria-label="Adet">
@@ -67,7 +73,7 @@ export function CartView() {
                 </button>
               </div>
               <button type="button" className="remove-button" onClick={() => remove(l.id)}>
-                Kaldır
+                {t(site, "txt_cart_remove")}
               </button>
               <p className="price">{formatPrice(l.product.price * l.quantity)}</p>
             </div>
@@ -77,30 +83,30 @@ export function CartView() {
 
       <aside className="summary-box" aria-label="Sipariş özeti">
         <div className="summary-row">
-          <span>Toplam</span>
+          <span>{t(site, "txt_cart_total")}</span>
           <span>{formatPrice(total)}</span>
         </div>
         <p className="field-hint">
           {total >= site.freeShippingLimit
-            ? "Kargo ücretsiz."
-            : `${formatPrice(site.freeShippingLimit - total)} daha ekleyin, kargo ücretsiz olsun.`}
+            ? t(site, "txt_cart_free_shipping")
+            : t(site, "txt_cart_shipping_left", { kalan: formatPrice(site.freeShippingLimit - total) })}
         </p>
         <div className="field">
-          <label htmlFor="ad">Ad Soyad</label>
+          <label htmlFor="ad">{t(site, "txt_cart_name")}</label>
           <input id="ad" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="field">
-          <label htmlFor="il">İl / İlçe</label>
+          <label htmlFor="il">{t(site, "txt_cart_city")}</label>
           <input
             id="il"
             autoComplete="address-level2"
-            placeholder="Örn: Adana / Çukurova"
+            placeholder={t(site, "txt_cart_city_placeholder")}
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
         </div>
         <div className="field">
-          <label htmlFor="siparis-notu">Sipariş notu</label>
+          <label htmlFor="siparis-notu">{t(site, "txt_cart_note")}</label>
           <textarea id="siparis-notu" rows={2} value={note} onChange={(e) => setNote(e.target.value)} />
         </div>
         <OrderConsent
@@ -123,7 +129,7 @@ export function CartView() {
             }
           }}
         >
-          <WhatsAppIcon size={22} /> WhatsApp ile sipariş ver
+          <WhatsAppIcon size={22} /> {t(site, "txt_order_whatsapp")}
         </a>
         <p className="field-hint">{fill(site.raw.cart_whatsapp_hint, site)}</p>
       </aside>

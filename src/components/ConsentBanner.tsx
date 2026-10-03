@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useState } from "react";
 import { useSite } from "@/lib/catalog";
+import { t } from "@/lib/site";
 import { LegalModal, type LegalSlug } from "./LegalModal";
 
 const KEY = "orimini-onay";
@@ -51,7 +52,7 @@ export function ConsentBanner() {
             )}
           </p>
           <button type="button" className="btn btn-primary btn-small" onClick={accept}>
-            Anladım
+            {t(site, "txt_consent_accept")}
           </button>
         </div>
       )}

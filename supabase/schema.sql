@@ -215,6 +215,7 @@ create table if not exists pages (
   id uuid primary key default gen_random_uuid(),
   slug text not null unique,
   title text not null,
+  short_title text,
   eyebrow text,
   lead text,
   content text,
@@ -230,6 +231,7 @@ create table if not exists pages (
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
+alter table pages add column if not exists short_title text;
 select orimini_setup_table('pages');
 
 -- =============================================
