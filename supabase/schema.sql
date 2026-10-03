@@ -53,6 +53,7 @@ begin
   execute format('create policy %I on %I for all using (public.is_admin()) with check (public.is_admin())', t || '_admin_all', t);
 end;
 $$;
+revoke execute on function public.orimini_setup_table(text, boolean) from public, anon, authenticated;
 
 -- =============================================
 -- SİTE AYARLARI (logo, iletişim, duyuru bar, footer, satıcı bilgileri, SEO doğrulama...)
