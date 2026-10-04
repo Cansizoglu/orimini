@@ -4,7 +4,9 @@
 export type SettingField = {
   key: string;
   label: string;
-  type?: "text" | "textarea" | "image" | "number" | "checkbox" | "color";
+  type?: "text" | "textarea" | "image" | "number" | "checkbox" | "color" | "range";
+  min?: number;
+  max?: number;
   hint?: string;
   default: string;
   wide?: boolean;
@@ -87,6 +89,24 @@ export const settingGroups: SettingGroup[] = [
         default: "",
         hint: "Google Maps > Paylaş > Harita yerleştir kısmındaki src=\"...\" adresini yapıştırın.",
       },
+    ],
+  },
+  {
+    title: "🎞️ Kayan kampanya yazısı",
+    description: "Arama kutusunun altında sağdan sola kayan yazı. Her satır ayrı bir mesajdır, aralarına ✦ işareti konur. Fare üzerine gelince durur.",
+    fields: [
+      { key: "marquee_active", label: "Kayan yazı açık", type: "checkbox", default: "true" },
+      {
+        key: "marquee_text",
+        label: "Mesajlar (her satıra bir mesaj)",
+        type: "textarea",
+        wide: true,
+        default: "{kargo_limit} ve üzeri siparişlerde kargo ücretsiz\nİsim ve tarih nakışı ücretsiz\nWhatsApp'tan tek mesajla kolay sipariş\nDoğum günü ve özel günler için kişiye özel takımlar",
+      },
+      { key: "marquee_speed", label: "Kayma hızı (1 = çok yavaş, 10 = çok hızlı)", type: "range", min: 1, max: 10, default: "4" },
+      { key: "marquee_link", label: "Tıklanınca gideceği adres (boş bırakılabilir)", hint: "Örn: /urunler, /kategori/kiz-elbise veya whatsapp", default: "" },
+      { key: "marquee_bg", label: "Arka plan rengi", type: "color", default: "#f3dcd4" },
+      { key: "marquee_color", label: "Yazı rengi", type: "color", default: "#5a3825" },
     ],
   },
   {
