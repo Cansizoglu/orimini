@@ -48,6 +48,7 @@ export default function AdminAyarlarPage() {
       case 'image': return <ImageUpload value={val} onChange={(url) => u(f.key, url)} />
       case 'number': return <input type="number" className="admin-input" value={val} onChange={(e) => u(f.key, e.target.value)} />
       case 'checkbox': return <div className="flex items-center gap-2 pt-1"><input type="checkbox" id={f.key} className="w-4 h-4" checked={val === 'true'} onChange={(e) => u(f.key, e.target.checked ? 'true' : 'false')} /><label htmlFor={f.key} className="text-sm font-semibold">{f.label}</label></div>
+      case 'range': return <div className="flex items-center gap-3"><input type="range" min={f.min ?? 1} max={f.max ?? 10} value={val || f.default} onChange={(e) => u(f.key, e.target.value)} className="flex-1" /><span className="text-sm font-bold w-8 text-center">{val || f.default}</span></div>
       case 'color': return <div className="flex items-center gap-2"><input type="color" value={val || '#ffffff'} onChange={(e) => u(f.key, e.target.value)} className="h-10 w-14 rounded border" /><input className="admin-input" value={val} onChange={(e) => u(f.key, e.target.value)} /></div>
       default: return <input className="admin-input" value={val} onChange={(e) => u(f.key, e.target.value)} />
     }

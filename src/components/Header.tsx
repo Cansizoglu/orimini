@@ -10,6 +10,7 @@ import { useFavorites } from "@/lib/favorites";
 import { fill, isOn } from "@/lib/site";
 import type { MenuLink } from "@/lib/types";
 import { questionMessage, whatsappUrl } from "@/lib/whatsapp";
+import { Marquee } from "./Marquee";
 import { SearchBox } from "./SearchBox";
 import { BagIcon, CloseIcon, HeartIcon, MenuIcon, WhatsAppIcon } from "./icons";
 
@@ -83,6 +84,8 @@ export function Header({ menu, mobileMenu }: { menu: MenuLink[]; mobileMenu: Men
           </Link>
         </div>
       </div>
+
+      <Marquee site={site} />
 
       <nav id="ana-menu" className={`main-nav${open ? " is-open" : ""}`} aria-label="Ana menü">
         <ul className="container">
